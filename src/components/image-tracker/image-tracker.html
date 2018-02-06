@@ -1,0 +1,22 @@
+<!-- Generated template for the ImageTrackerComponent component -->
+<div>
+  <p class="title">Image Tracker</p>
+  <ion-slides slidesPerView="auto" spaceBetween="13" zoom="false" (ionSlideDidChange)="sliderChanged($event)" #Slides>
+	<ion-slide *ngFor = "let pho of photoProg; let i=index;let x;">
+		<p class="dayctr">Day {{i+1}}</p>
+		<div class="photo-main"><!-- [ngStyle]="{'background-image':'url('+pho+')'}" -->
+			<img class="i{{i}}" [src]="pho?.photoUrl"/>
+		</div>
+	</ion-slide>
+	<ion-slide class="more-pic" *ngIf="canAddTodaysPhoto">
+		<p class="dayctr">Day {{photoProg?.length+1}}</p>
+		<div class="photo-main" >
+   	 		<input type="file" accept="image/*" (tap)="takePhotoAction($event)" (change)="takePic($event)" capture="camera" /> <!--  [disabled]="!canAddTodaysPhoto || !isLoggedIn" -->
+   	 	</div>
+	</ion-slide>
+	<ion-slide class="buffer">
+		<p class="dayctr">Day {{photoProg?.length+1}}</p>
+		<div class="photo-main"></div>
+	</ion-slide>
+  </ion-slides>
+</div>
