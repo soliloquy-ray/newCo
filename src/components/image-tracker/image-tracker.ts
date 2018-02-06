@@ -29,7 +29,7 @@ export class ImageTrackerComponent {
   @Output() uploaded: EventEmitter<any> = new EventEmitter();
   isLoggedIn: boolean = false;
 
-  constructor(private loader: LoadingController, private evt: EvtProvider, private app : App) {
+  constructor(private loader: LoadingController, private evt: EvtProvider) {
     console.log('Hello ImageTrackerComponent Component');
     this.text = 'Hello World';
     /*let d = new Date();
