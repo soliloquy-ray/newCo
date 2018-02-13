@@ -1,0 +1,16 @@
+<!-- Generated template for the SideMenuComponent component -->
+<ion-content>
+  <ion-list>
+  	<!-- unused <button menuClose class="main" ion-item >My Account</button> -->
+  	<button menuClose class="main" ion-item  (tap)="whatWeDo()">Products</button>
+  	<button menuClose class="main dbl" ion-item (tap)="whatsBought()">Purchases</button>
+  	<button menuClose class="main" ion-item (tap)="whosBuyin()">Customers</button>
+  	<button menuClose class="main" ion-item (tap)="myAccount()">Profile</button>
+    <a target="_blank" *ngFor="let p of links" [href]="p?.link">
+    	<button menuClose ion-item>
+    		{{p?.title}}
+    	</button>
+    </a>
+  </ion-list>
+
+</ion-content>

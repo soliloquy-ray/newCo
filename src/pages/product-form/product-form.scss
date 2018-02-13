@@ -1,0 +1,133 @@
+page-product-form {
+  .scroll-content{
+    overflow: hidden;
+  }
+  button {
+    float: right;
+    width: 6vw;
+    margin-right:20px !important;
+
+    span{
+      margin-top: 5px;
+    }
+  }
+	ion-navbar{
+		ion-title{
+
+			ion-icon{
+				float:right;
+			}
+		}
+	}
+
+  .content {
+    clear: both;
+    padding: 0 20px;
+    background-color:#333;
+    
+    div.form{
+    	padding:1.5vh;
+    	background-color:inherit;
+    	ion-row{
+
+    		ion-label{
+    			color:#999;
+    			flex:none;
+    			display:block;
+    			clear:both;
+    			width:100%;
+    			margin:1.5vh 0 0vh;
+    		}
+
+    		ion-input, ion-textarea{
+    			color:#333;
+    			flex:none;
+    			display: block;
+    			clear:both;
+    			width:100%;
+    			padding:1vh;
+    			input{
+    				margin:0;
+    				background-color:#fff;
+    				height:3.5vh;
+    			}
+    			textarea{
+    				margin:0;
+    				background-color:#fff;
+    				height:7vh;
+    			}
+    		}
+
+    		&>input{
+    			color:#eee;
+    		}
+
+
+			button[ion-button]{
+				padding:5px 10px;
+				font-size:1.9vh;
+				line-height:1.5;
+				border-radius:3px;
+				height:4.5vh;
+				background-color:#fff;
+				color:#333;
+				text-transform:capitalize;
+				margin:3vh 2vw 0 0;
+				width:auto;
+
+				ion-icon{
+					margin-right:2vw;
+				}
+
+				&.save{
+					background-color:forestgreen;
+					color:#fff;
+				}
+
+				span{
+					display:block;
+					margin:0;
+					position:relative;
+				}
+			}
+    	}
+    }
+  }
+}
+
+ion-modal.custom-popup ion-backdrop {
+  visibility: visible !important;
+  z-index: 0;
+}
+//  ion-modal.custom-popup .modal-wrapper{
+//     top: 20%;
+//     width:80%;
+//     height:300px;
+//
+//     position:absolute;
+// }
+
+ion-modal.custom-popup .modal-wrapper {
+  left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  width: 95%;
+  height: 475px;
+  display: block;
+  top: calc(5vh);
+
+position: absolute;
+  contain: unset!important;
+}
+
+.app-root,
+.ion-page,
+ion-app,
+ion-nav,
+ion-tab,
+ion-tabs {
+  contain: unset!important;
+}
+
+

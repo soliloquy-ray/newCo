@@ -1,0 +1,149 @@
+page-profile {
+
+	ion-navbar{
+		ion-title{
+
+			ion-icon{
+				margin-right:3vw;
+			}
+		}
+	}
+
+	ion-content{
+
+		.scroll-content{
+			background-color:#333;
+		}
+
+		div.form{
+			display:inline-block;
+			width:100%;
+			padding:2vh;
+			background-color:#fff;
+
+			h4{
+				ion-icon{
+					float:right;
+				}
+			}
+
+			ion-row{
+				color:#333;
+				font-size: 2vh;
+				margin-top:1.5vh;
+				background-color:#eee;
+				padding:2vw;
+
+				div.names{
+					width:65%;
+					height:15VH;
+				}
+				div.image{
+					height:15vh;
+					padding:1vh 0;
+					width:35%;
+					display:block;
+					clear:both;
+					text-align:right;
+					position:relative;
+					z-index:2;
+					input[name="photo-up"]{
+						position:absolute;
+						top:0;
+						right:0;
+						height:100%;
+						width:13vh;
+						opacity:0;
+						z-index:4;
+					}
+
+					ion-icon{
+						height:100%;
+						display:inline-table;
+						width:13vh;
+						font-size:11.5vh;
+						background-color:#ccc;
+						text-align:center;
+						border-radius:100%;
+						z-index:3;
+						&:after{
+							content:"";
+
+						}
+					}
+
+					img{
+						height:100%;
+						display:inline-table;
+						width:13vh;
+						z-index:3;
+						object-fit:cover;
+						object-position:center;
+						border-radius:100%;
+						position:relative;
+					}
+				}
+
+				p.label{
+					display:block;
+					clear:both;
+					width:100%;
+					color:#888;
+					font-size:1.8vh;
+					margin-bottom:2vh;
+					margin-top:1vh;
+					margin-bottom:0;
+				}
+
+				&.button-ctrl{
+					background-color:transparent;
+					button[ion-button]{
+						padding:5px 10px;
+						font-size:1.8vh;
+						line-height:1.5;
+						border-radius:3px;
+						height:4.5vh;
+						background-color:transparent;
+						color:#333;
+						text-transform:capitalize;
+						margin:0 2vw 0 0;
+
+						ion-icon{
+							margin-right:2vw;
+						}
+
+						&.save{
+							background-color:forestgreen;
+							color:#fff;
+						}
+					}
+				}
+
+				ion-input{
+					height:3vh;
+					flex:none;
+					display:inline-table;
+					input{
+						margin:0;
+						height:4vh;
+						padding:1vh;
+						border-radius:1vh;
+						background-color:#fff;
+						color:#333;
+						&:disabled{
+							color:#000;
+							background-color:inherit;
+						}
+						&.text-input[disabled]{
+							opacity:0.9;
+						}
+					}
+				}
+
+			}
+
+		}
+
+	}
+
+}

@@ -3,20 +3,36 @@ import { NavController } from 'ionic-angular';
 
 import { EvtProvider } from "../../providers/evt/evt";
 
+import * as Quill from "quill";
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
+  ql: any;
   constructor(public navCtrl: NavController, private evt: EvtProvider) {
-
+    console.log(Quill);
   }
 
   ngOnInit(){
   	this.evt.evtApp.login({email:"test@gmail.com",password:"pass1234"}).then(response=>{
   		console.log(response.user);
   	})
+    this.ql = new Quill('.quill-container', {
+       modules: {
+         toolbar: [
+           [
+             { header: [1, 2, false] } 
+           ],
+           ['bold', 'italic', 'underline'],
+           ['image', 'code-block']
+         ]
+      },
+      placeholder: 'Compose an epic...',
+      theme: 'snow'  // or 'bubble'
+    })
   }
 
   createUser(){

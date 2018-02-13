@@ -5,28 +5,43 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+
+/* pages */
 import { HomePage } from '../pages/home/home';
+import { ProfilePage } from '../pages/profile/profile';
+import { MyProductsPage } from '../pages/my-products/my-products';
+import { ProductFormPage } from '../pages/product-form/product-form';
+
+
 import { EvtProvider } from '../providers/evt/evt';
 
 import { HttpModule } from '@angular/http';
-import { ComponentsModule } from '../components/components.module'
+import { ComponentsModule } from '../components/components.module';
+
+const pages = [
+            MyApp,
+            HomePage,
+            ProfilePage,
+            MyProductsPage,
+            ProductFormPage
+          ];
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage
-  ],
+  declarations: pages,
   imports: [
     ComponentsModule,
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{}, {
+      links: [
+        { component: HomePage, name: 'Home', segment: 'home' },
+        { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
+        { component: MyProductsPage, name: 'MyProductsPage', segment: 'products' },
+      ]
+    }),
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage
-  ],
+  entryComponents: pages,
   providers: [
     StatusBar,
     SplashScreen,

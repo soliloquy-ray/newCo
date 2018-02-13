@@ -1,5 +1,5 @@
 import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
-import { Slides, LoadingController, App } from 'ionic-angular';
+import { Slides, LoadingController } from 'ionic-angular';
 
 import { EvtProvider } from '../../providers/evt/evt';
 

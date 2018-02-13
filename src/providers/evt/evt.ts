@@ -79,4 +79,16 @@ export class EvtProvider {
 
   }
 
+  getThngData(id:string = '') : Promise<any>{
+    return (
+      this.getUserContext().then(user=>{
+        return (
+          user.$init.then(usr=>{
+            return usr.thng(id).read()
+          })
+        )
+      })
+    );
+  }
+
 }

@@ -1,0 +1,61 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+  		<ion-icon name="menu" menuToggle></ion-icon>
+  		User Profile
+  	</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<div class="form">
+	<h4 class="head">
+		User Details
+		<ion-icon name="create" (click)="editMode(true)"></ion-icon>
+	</h4>
+
+	<ion-row>
+		<div class="names">
+			<p class="label">First Name</p>
+			<ion-input type="text" [(ngModel)]="userProfile.firstName" [disabled]="!edit"></ion-input>
+			<p class="label">Last Name</p>
+			<ion-input type="text" [(ngModel)]="userProfile.lastName" [disabled]="!edit"></ion-input>
+		</div>
+		<div class="image">
+			<input type="file" accept="image/*" name="photo-up" (change)="validateImg($event)"/>
+			<ion-icon name="person" *ngIf="!userProfile.hasPhoto"></ion-icon>
+			<img [src]="userProfile?.photo" *ngIf="userProfile.hasPhoto"/>
+		</div>
+	</ion-row>
+
+	<ion-row>
+		<p class="label">E-mail</p>
+		<ion-input type="email"[(ngModel)]="userProfile.email" [disabled]="!edit"></ion-input>
+	</ion-row>
+	<!--ion-row>
+	</ion-row>
+	<ion-row>
+	</ion-row-->
+	<ion-row>
+		<p class="label">Country</p>
+		<ion-input type="text" [(ngModel)]="userProfile.cty" [disabled]="!edit"></ion-input>
+	</ion-row>
+
+	<ion-row class="button-ctrl" *ngIf="edit">
+		<button ion-button class="save" (click)="saveData()"><ion-icon name="checkmark"></ion-icon>Update</button>
+		<button ion-button class="cancel" (click)="cancelEdit()"><ion-icon name="close"></ion-icon>Cancel</button>
+	</ion-row>
+</div>
+
+
+</ion-content>
