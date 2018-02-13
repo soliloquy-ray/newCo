@@ -1,5 +1,16 @@
 page-profile {
 
+	ion-header{
+		
+		.toolbar-ios ion-title{
+			padding-left:12px;
+			padding-right:12px;
+			.toolbar-title{
+				text-align:left;
+			}
+		}
+	}
+	
 	ion-navbar{
 		ion-title{
 
