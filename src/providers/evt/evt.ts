@@ -15,6 +15,9 @@ export class EvtProvider {
 
   evtApp : any;
   evtUser: any;
+   productId = "U4kcDVP2eDsRtKawwkyMdBbr";
+   customerId = "U4kTBncPeDswtKaaRFNE8dmk";
+   transId = "UHkTh5h6BXsatpRRa2wgNrwt";
   constructor(public http: Http) {
 
     localStorage.evrythngApiKey = "PfaZ66GBFcScOcANRiUacBs9kOzCLXDpr8AF4n2dfiZpHFUDibxMR13oIoJXUhLElLOme6MuiERRZ1CN";
@@ -80,11 +83,38 @@ export class EvtProvider {
   }
 
   getThngData(id:string = '') : Promise<any>{
+    let self = this;
     return (
       this.getUserContext().then(user=>{
         return (
           user.$init.then(usr=>{
-            return usr.thng(id).read()
+            return usr.thng(id).read({params:{filter:`product=${self.productId}`}})
+          })
+        )
+      })
+    );
+  }
+
+  getCustomerData(id:string = '') : Promise<any>{
+    let self = this;
+    return (
+      this.getUserContext().then(user=>{
+        return (
+          user.$init.then(usr=>{
+            return usr.thng(id).read({params:{filter:`product=${self.customerId}`}})
+          })
+        )
+      })
+    );
+  }
+
+  getTransData(id:string = '') : Promise<any>{
+    let self = this;
+    return (
+      this.getUserContext().then(user=>{
+        return (
+          user.$init.then(usr=>{
+            return usr.thng(id).read({params:{filter:`product=${self.transId}`}})
           })
         )
       })

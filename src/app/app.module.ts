@@ -10,7 +10,12 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ProfilePage } from '../pages/profile/profile';
 import { MyProductsPage } from '../pages/my-products/my-products';
+import { ProductPage } from '../pages/product/product';
 import { ProductFormPage } from '../pages/product-form/product-form';
+import { CustomerFormPage } from '../pages/customer-form/customer-form';
+import { CustomerListPage } from '../pages/customer-list/customer-list';
+import { TransactionFormPage } from '../pages/transaction-form/transaction-form';
+import { TransactionListPage } from '../pages/transaction-list/transaction-list';
 
 
 import { EvtProvider } from '../providers/evt/evt';
@@ -23,7 +28,12 @@ const pages = [
             HomePage,
             ProfilePage,
             MyProductsPage,
-            ProductFormPage
+            ProductFormPage,
+            ProductPage,
+            CustomerFormPage,
+            CustomerListPage,
+            TransactionFormPage,
+            TransactionListPage,
           ];
 
 @NgModule({
@@ -37,6 +47,9 @@ const pages = [
         { component: HomePage, name: 'Home', segment: 'home' },
         { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
         { component: MyProductsPage, name: 'MyProductsPage', segment: 'products' },
+        { component: ProductPage, name: 'ProductPage', segment: 'product' },
+        { component: CustomerListPage, name: 'CustomerListPage', segment: 'customers' },
+        { component: TransactionListPage, name: 'TransactionListPage', segment: 'transactions' },
       ]
     }),
   ],

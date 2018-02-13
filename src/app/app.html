@@ -1,5 +1,5 @@
-<ion-menu [content]="content"  type="overlay" side="left" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
+<ion-menu [content]="content"  side="left" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
   <button ion-button id="btnClose" menuClose><ion-icon name="close"></ion-icon></button>
   <side-menu></side-menu>
 </ion-menu>
-<ion-nav [root]="rootPage" #content></ion-nav>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

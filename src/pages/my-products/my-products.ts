@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ModalOptions, Slides, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ModalOptions, LoadingController, MenuController } from 'ionic-angular';
 
-import { ProductFormPage } from "../product-form/product-form"
+import { ProductFormPage } from "../product-form/product-form";
+import { ProductPage } from "../product/product";
+import { TransactionFormPage } from "../transaction-form/transaction-form";
+import { TransactionListPage } from "../transaction-list/transaction-list";
 
 import { EvtProvider } from "../../providers/evt/evt";
 
@@ -21,15 +24,13 @@ export class MyProductsPage {
 
 	productList: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
-  	private evt: EvtProvider, private loader: LoadingController) {
+  	private evt: EvtProvider, private loader: LoadingController, private menu: MenuController) {
   }
 
-  ngOnInit(){
-  	this.fetchProductsFromEVT();
-  }
-
-  ionViewDidLoad() {
+  ngAfterViewInit() {
     console.log('ionViewDidLoad MyProductsPage');
+  	this.menu.close();
+  	this.fetchProductsFromEVT();
   }
 
   addProduct(){
@@ -40,7 +41,7 @@ export class MyProductsPage {
   	let self = this;
     let load = this.loader.create({
       spinner: 'crescent',
-      dismissOnPageChange: true,
+      dismissOnPageChange: false,
       showBackdrop: true,
       content: `Loading...`,
       enableBackdropDismiss:false});
@@ -53,7 +54,7 @@ export class MyProductsPage {
   }
 
   toProductPage(prodData){
-  	//this.navCtrl.push(ProductPage,{data:prodData});
+  	this.navCtrl.push(ProductPage,{data:prodData});
   }
 
   clean(prodArr:Array<any>) : Array<any>{
@@ -63,6 +64,25 @@ export class MyProductsPage {
   	
   	console.log(prodArr);
   	return prodArr;
+  }
+
+  transact(){
+    const videoModalOptions : ModalOptions = {
+      showBackdrop:true,
+      enableBackdropDismiss:true
+    };
+
+    const   videoData = { 'foo': 'bar' };
+    let self = this;
+
+
+    let viewModal = this.modalCtrl.create(TransactionFormPage, {data : videoData}, videoModalOptions);
+    viewModal.onDidDismiss(()=>{
+    	self.navCtrl.setRoot(TransactionListPage);
+    })
+    viewModal.present();
+    console.log("openModal");
+
   }
 
 

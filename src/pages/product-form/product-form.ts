@@ -1,4 +1,4 @@
-import { Component , Renderer2, ViewChild, ElementRef} from '@angular/core';
+import { Component , Renderer2} from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { EvtProvider } from "../../providers/evt/evt";
