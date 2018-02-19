@@ -31,10 +31,19 @@ export class MyProductsPage {
     console.log('ionViewDidLoad MyProductsPage');
   	this.menu.close();
   	this.fetchProductsFromEVT();
-  }
+  	if(typeof localStorage.customerList == "undefined" || localStorage.customerList === "[]"){
 
-  addProduct(){
-  	this.openModal();
+	  	this.evt.getCustomerData().then(prodList =>{
+	  		let custList = {};
+	  		prodList.forEach((val,ind)=>{
+	  			custList[val.id] = val;
+	  		})
+
+	  		Promise.resolve(custList).then(res=>{
+	  			localStorage.customerList = JSON.stringify(res);	
+	  		})
+	  	}).catch(console.info);
+  	}
   }
 
   fetchProductsFromEVT(){
@@ -43,12 +52,11 @@ export class MyProductsPage {
       spinner: 'crescent',
       dismissOnPageChange: false,
       showBackdrop: true,
-      content: `Loading...`,
+      content: `Loading Data...`,
       enableBackdropDismiss:false});
     load.present();
   	this.evt.getThngData().then(prodList =>{
   		self.productList = self.clean(prodList);
-  		console.log(self.productList);
   		load.dismiss();
   	}).catch(console.info);
   }
@@ -58,28 +66,33 @@ export class MyProductsPage {
   }
 
   clean(prodArr:Array<any>) : Array<any>{
+  	let prodList = {};
   	prodArr.forEach((val,ind)=>{
+		prodList[val.id] = val;
   		val.properties.images = eval(val.properties.images);
+  	});
+
+  	Promise.resolve(prodList).then(res=>{
+  		localStorage.setItem('prodList',JSON.stringify(res));
   	});
   	
   	console.log(prodArr);
   	return prodArr;
   }
 
-  transact(){
+  transact(prod){
     const videoModalOptions : ModalOptions = {
       showBackdrop:true,
       enableBackdropDismiss:true
     };
-
-    const   videoData = { 'foo': 'bar' };
+	console.log(prod);
     let self = this;
 
 
-    let viewModal = this.modalCtrl.create(TransactionFormPage, {data : videoData}, videoModalOptions);
-    viewModal.onDidDismiss(()=>{
+    let viewModal = this.modalCtrl.create(TransactionFormPage, {product : prod}, videoModalOptions);
+    /*viewModal.onDidDismiss(()=>{
     	self.navCtrl.setRoot(TransactionListPage);
-    })
+    })*/
     viewModal.present();
     console.log("openModal");
 

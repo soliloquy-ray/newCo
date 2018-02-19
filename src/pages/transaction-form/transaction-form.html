@@ -7,12 +7,41 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>transactionForm</ion-title>
+    <ion-title>
+    	{{product?.name}}
+    	<ion-icon name="close" (click)="dismiss()"></ion-icon>
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+<div class="form" name="myForm">
+	<ion-row>
+		<ion-label>Product</ion-label>
+		<span class="productname">{{product?.name}}</span>
+		<img class="preview" [src]="product?.properties.images[0]"/>
+	</ion-row>
+	<ion-row>
+		<ion-label>Sell To</ion-label>
+		<select [(ngModel)] = "transact.customerId" required="true" (change)="forTheBetter($event)">
+			<option value="" selected="true">&nbsp;---------&nbsp;</option>
+			<option *ngFor = "let cust of customerList" value="{{cust?.id}}">{{cust?.name}}</option>
+		</select>
+	</ion-row>
+	<ion-row>
+		<ion-label>Quantity (number of units) </ion-label>
+		<input type="number" min="0" step="1" [(ngModel)]="transact.amt" required="true"/>
+	</ion-row>
+	<ion-row>
+		<ion-label>Remarks </ion-label>
+		<ion-textarea clearInput="true" [(ngModel)]="transact.description"></ion-textarea>
+	</ion-row>
+	<ion-row>
+		<button ion-button class="save" (click)="save()"><ion-icon name="checkmark"> Save</ion-icon></button>
+		<button ion-button class="cancel" (click)="dismiss()"><ion-icon name="close"> Cancel</ion-icon></button>
+	</ion-row>
+</div>
 
 </ion-content>

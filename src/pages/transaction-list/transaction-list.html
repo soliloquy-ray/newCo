@@ -7,12 +7,40 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>transactionList</ion-title>
+    <ion-title>
+    	<ion-icon name="menu" menuToggle></ion-icon>
+    	Transactions
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+	<ion-row class="headers" *ngIf="transactions?.length > 0">
+		<ion-col col-3>
+			Product
+		</ion-col>
+		<ion-col col-3>
+			Customer
+		</ion-col>
+		<ion-col col-3>
+			Quantity
+		</ion-col>
+		<ion-col col-3>
+			Status
+		</ion-col>
+	</ion-row>
+	<ion-row *ngFor="let trans of transactions">
+		<ion-col col-3>{{trans?.productName}}</ion-col>
+		<ion-col col-3>{{trans?.customerName}}</ion-col>
+		<ion-col col-3>{{trans?.properties.amount}}</ion-col>
+		<ion-col col-3>{{trans?.identifiers.status}}</ion-col>
+		
+	</ion-row>
+
+	<p class="notice"  *ngIf="transactions.length < 1">
+		Nothing here but crickets!
+	</p>
 
 </ion-content>

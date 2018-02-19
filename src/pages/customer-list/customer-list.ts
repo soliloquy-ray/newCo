@@ -36,7 +36,7 @@ export class CustomerListPage {
       spinner: 'crescent',
       dismissOnPageChange: false,
       showBackdrop: true,
-      content: `Loading...`,
+      content: `Loading Data...`,
       enableBackdropDismiss:false});
     load.present();
   	this.evt.getCustomerData().then(prodList =>{

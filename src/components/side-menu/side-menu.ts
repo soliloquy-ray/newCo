@@ -4,6 +4,7 @@ import { App } from 'ionic-angular';
 import { ProfilePage } from '../../pages/profile/profile';
 import { MyProductsPage } from '../../pages/my-products/my-products';
 import { CustomerListPage } from '../../pages/customer-list/customer-list';
+import { TransactionListPage } from '../../pages/transaction-list/transaction-list';
 
 /**
  * Generated class for the SideMenuComponent component.
@@ -39,8 +40,8 @@ export class SideMenuComponent {
   }
 
   whatsBought(){
-    //let nav = this.app.getRootNav();
-    return ;
+    let nav = this.app.getRootNav();
+    nav.setRoot(TransactionListPage);
   }
 
   whatWeDo(){

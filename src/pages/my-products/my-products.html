@@ -10,6 +10,8 @@
     <ion-title>
   		<ion-icon name="menu" menuToggle></ion-icon>
   		Products
+
+    	<button ion-button (click)="openModal()"><ion-icon name="add"> Add</ion-icon></button>
   	</ion-title>
   </ion-navbar>
 
@@ -19,7 +21,6 @@
 <ion-content padding>
 
 <div class="productBox" *ngFor = "let prod of productList">
-<p class="brand">{{prod?.properties.brandname}}</p>
 
   <ion-slides slidesPerView="auto" spaceBetween="0" zoom="false">
 	<ion-slide *ngFor = "let img of prod.properties.images">
@@ -29,17 +30,20 @@
 	<!--span class="imagelist">
 		<img *ngFor="let img of prod.properties.images" src="{{img}}"/>
 	</span-->
-	<p class="name">{{prod?.name}}</p>
-	<p class="price">P{{prod?.properties.price}}</p>
-	<ion-col col-6>
-		<a class="desc" (click)="transact(prod)">Transact</a>
-	</ion-col>
-	<ion-col col-6>
-		<a class="desc" (click)="toProductPage(prod)">More&nbsp;&gt;&gt;</a>
-	</ion-col>
-</div>
-<div class="addProduct" (tap)="addProduct()">
-	<img src="../assets/imgs/uploadBox.png"/>
+	<span class="deets">
+		<p class="brand">{{prod?.properties.brandname}}</p>
+		<p class="name">{{prod?.name}}</p>
+		<p class="price">{{prod?.properties.price  | currency:'PHP':'symbol-narrow':'1.2-2'}}</p>
+		<p class="desc">{{prod?.description}}</p>
+		<ion-row>
+			<ion-col col-6>
+				<a class="desc" (click)="transact(prod)">Transact</a>
+			</ion-col>
+			<ion-col col-6>
+				<a class="desc" (click)="toProductPage(prod)">More&nbsp;&gt;&gt;</a>
+			</ion-col>
+		</ion-row>
+	</span>
 </div>
 
 </ion-content>
