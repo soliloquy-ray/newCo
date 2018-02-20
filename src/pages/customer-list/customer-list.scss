@@ -26,102 +26,60 @@ page-customer-list {
 	ion-content{
 
 		&.content .scroll-content{
-			padding:2vw !important;
 		}
 
-		ion-row{
-
-			&.headers{
-				ion-col{
-					font-weight: bolder;
-					white-space:nowrap;
-					font-size:2.15vh;
-				}
-			}
-
-			ion-col{
-				text-align:left;
-				font-size:2vh;
-			}
-
-		}
-
-		text-align:center;
-		div.addProduct{
-			height:30vw;
-			width:30vw;
-			display:inline-block;
-			padding:2vw;	
+		span.cstmr{
+			padding:2vw;
+			box-shadow: 0 0 1px 0 rgba(30,30,30,0.4);
+			background-color:rgba(70,130,180,0.8);
+			margin-bottom:0.25vh;
+			display:table;
+			width:100%;
+			clear:both;
 			position:relative;
 
-			img{
-				display:block;
-				clear:both;
-				height:100%;
-				width:100%;
-			}
-		}
-
-		div.productBox{
-			width:42.5vw;
-			display:inline-block;
-			position: relative;
-			box-shadow:0 0 1px 1px #333;
-			margin:1vh 2vw 0 0;
-			border-radius:4px;
-			color:#fff;
-			background-color:rgba(30,30,30,0.8);
-			padding:1vw 0;
-			//background-color:rgba(30,30,30,0.4);
-			p{
-				margin:0;
-				width: 100%;
-				display:block;
-				z-index:3;
-				padding:1vw 0 1vw 2vw;
-				font-size:2vh;
-				&.brand{
-					position:absolute;
-					top:36vw;
-					left:0;
-					background-color:rgba(30,30,30,0.6);
-				}
+			ion-icon{
+				width:20vw;
+				display:inline-block;
+				padding:0 !important;
+				text-align:center;
+				float:left;
+				font-size:20vw;
+				background-color:#fff;
+				box-shadow: 0 0 1px 0 #333;
+				border-radius:20vw;
 			}
 
-			ion-slides{
-				.swiper-slide{
-					max-height:42.5vw;
-					padding:2vw;
-					.slide-zoom{
-						max-height:39.5vw;
-						background-color:#fff;
-						img{
-							max-height:39.5vw;
-							height:39.5vw;
-							object-fit:cover;
-							object-position:center;
-						}
+			div{
+				float:left;
+				width:75vw;
+				display:inline-block;
+				padding-left:3vw;
+				ion-row{
+					text-align:left;
+					width:100%;
+					display:block;
+					clear:both;
+					font-size:1.8vh;
+
+					&.name{
+						font-size:2.5vh;
+						margin:1vw 0;
+					}
+
+					&.address{
+						margin-bottom:1vw;
+						font-weight:bolder;
+						color:#55C;
+					}
+
+					&.desc{
+						min-height:5vh;
+						letter-spacing:0.5px;
 					}
 				}
-
-			}
-			span.imagelist{
-				padding:1vw 2vw;
-				position:relative;
-				display:block;
-				img{
-					position:relative;
-					
-				}	
-			}
-
-			a.desc{
-				color:#fff;
-				font-weight:bolder;
-				font-size:1.7vh;
-				padding:1vw 0 1vw 2vw;
 			}
 		}
-
 	}
+
 }

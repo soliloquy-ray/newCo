@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 
 /**
  * Generated class for the ProductPage page.
@@ -14,12 +14,38 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'product.html',
 })
 export class ProductPage {
+	prod : any;
+	@ViewChildren(Slides, {read: ElementRef}) slideList: QueryList<Slides>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  	if(navParams.get('data')){
+  		this.prod = navParams.get('data');
+  	}else if(typeof localStorage.prodList == "string" && localStorage.prodList != "" && localStorage.prodList != "[]" && localStorage.prodList != "{}"){
+  		this.prod = JSON.parse(localStorage.prodList)[navParams.get('id')];
+  	}else{
+  		//fetch from EVT directly
+  	}
+  	console.log(this.prod);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductPage');
+  }
+
+  elec_sld($event){
+  	let xd : Slides = $event;
+  	if(xd.getActiveIndex() == xd.length()-1){
+  		xd.lockSwipeToNext(true);
+  		xd.lockSwipeToPrev(false);
+  	}
+  	if(xd.getActiveIndex() <= 0){
+  		xd.lockSwipeToNext(false);
+  		xd.lockSwipeToPrev(true);
+  	}
+  	if(xd.length() <= 1){
+  		xd.lockSwipes(true);
+  	}
+
   }
 
 }

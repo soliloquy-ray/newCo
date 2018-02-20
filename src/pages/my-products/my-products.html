@@ -11,7 +11,7 @@
   		<ion-icon name="menu" menuToggle></ion-icon>
   		Products
 
-    	<button ion-button (click)="openModal()"><ion-icon name="add"> Add</ion-icon></button>
+    	<button ion-button (click)="openModal()"><ion-icon name="add"> </ion-icon>Add</button>
   	</ion-title>
   </ion-navbar>
 
@@ -22,7 +22,7 @@
 
 <div class="productBox" *ngFor = "let prod of productList">
 
-  <ion-slides slidesPerView="auto" spaceBetween="0" zoom="false">
+  <ion-slides slidesPerView="auto" spaceBetween="0" zoom="false" (ionSlideDrag)="elec_sld($event)">
 	<ion-slide *ngFor = "let img of prod.properties.images">
 		<img src="{{img}}"/>
 	</ion-slide>

@@ -1,3 +1,83 @@
 page-product {
 
+
+	ion-content{
+
+		.scroll-content{
+			padding:0 !important;
+		}
+
+		section.image{
+			display:block;
+			height:35vh;
+			width:100%;
+			clear:both;
+			position:relative;
+			ion-slides{
+				max-height:35vh;
+				min-height:35vh;
+				ion-slide{
+					max-height:35vh;
+					min-height:35vh;
+
+					.slide-zoom{
+						position:relative;
+						height:100%;
+
+						img{
+							position: absolute;
+							max-height:35vh;
+							min-height:35vh;
+							width:100%;
+							top:0;
+							left:0;
+							object-fit:cover;
+							object-position:center;
+						}
+					}
+				}
+			}
+			box-shadow:0 0 1px 0 #333;
+		}
+
+		div.body{
+			width:100%;
+			display: block;
+			clear:both;
+			padding:2vw 3vw;
+
+			p{
+				font-family:'Century Gothic';
+				margin:1vh 0;
+				display:block;
+				&.name{
+					font-size:2.5vh;
+					font-weight:bolder;
+					text-transform: capitalize;
+					width:50%;
+					display:inline-block;
+					float:left;
+				}
+
+				&.price{
+					width:50%;
+					display:inline-block;
+					float:left;
+				}
+
+				&.desc{
+					font-size:1.75vh;
+				}
+			}
+
+			b.head-desc{
+				width:100%;
+				display:inline-block;
+				clear:both;
+				margin-top:5vh;
+			}
+		}
+
+	}
+
 }

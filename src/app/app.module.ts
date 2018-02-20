@@ -47,7 +47,7 @@ const pages = [
         { component: HomePage, name: 'Home', segment: 'home' },
         { component: ProfilePage, name: 'ProfilePage', segment: 'profile' },
         { component: MyProductsPage, name: 'MyProductsPage', segment: 'products' },
-        { component: ProductPage, name: 'ProductPage', segment: 'product' },
+        { component: ProductPage, name: 'ProductPage', segment: 'product/:id' },
         { component: CustomerListPage, name: 'CustomerListPage', segment: 'customers' },
         { component: TransactionListPage, name: 'TransactionListPage', segment: 'transactions' },
       ]

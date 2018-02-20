@@ -1,6 +1,6 @@
 page-my-products {
 
-	font-family:'Calibri' !important;
+	font-family:'Century Gothic', sans-serif, Helvetica !important;
 	ion-header{
 		.toolbar-ios ion-title{
 			padding-left:12px;
@@ -48,6 +48,7 @@ page-my-products {
 
 		div.productBox{
 			width:47.5vw;
+			max-width:47.5vw;
 			display:inline-table;
 			position: relative;
 			box-shadow:0 0 1px 0 #333;
@@ -101,16 +102,17 @@ page-my-products {
 					width: 100%;
 					display:block;
 					z-index:3;
-					padding:0vw 0 1vw 2vw;
+					padding:0vw 0 1vw 3vw;
 					font-size:2vh;
 					text-align:left;
 					&.brand{
 						position:absolute;
 						bottom:27vw;
 						left:0;
-						background-color:rgba(30,30,30,0.8);
+						background-color:rgba(30,30,30,0.9);
 						color:#fff;
 						width:50%;
+						border-radius: 4vw 0.5vw;
 					}
 					&.desc{
 						height:8vw;

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ModalOptions, LoadingController, MenuController } from 'ionic-angular';
+import { Component, QueryList, ViewChildren, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, ModalOptions, LoadingController, MenuController, Slides } from 'ionic-angular';
 
 import { ProductFormPage } from "../product-form/product-form";
 import { ProductPage } from "../product/product";
@@ -23,6 +23,7 @@ import { EvtProvider } from "../../providers/evt/evt";
 export class MyProductsPage {
 
 	productList: any;
+	@ViewChildren(Slides, {read: ElementRef}) slideList: QueryList<Slides>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
   	private evt: EvtProvider, private loader: LoadingController, private menu: MenuController) {
   }
@@ -62,7 +63,7 @@ export class MyProductsPage {
   }
 
   toProductPage(prodData){
-  	this.navCtrl.push(ProductPage,{data:prodData});
+  	this.navCtrl.push(ProductPage,{id:prodData.id, data:prodData});
   }
 
   clean(prodArr:Array<any>) : Array<any>{
@@ -76,7 +77,6 @@ export class MyProductsPage {
   		localStorage.setItem('prodList',JSON.stringify(res));
   	});
   	
-  	console.log(prodArr);
   	return prodArr;
   }
 
@@ -117,4 +117,20 @@ export class MyProductsPage {
     console.log("openModal");
   }
 
+
+  elec_sld($event){
+  	let xd : Slides = $event;
+  	if(xd.getActiveIndex() == xd.length()-1){
+  		xd.lockSwipeToNext(true);
+  		xd.lockSwipeToPrev(false);
+  	}
+  	if(xd.getActiveIndex() <= 0){
+  		xd.lockSwipeToNext(false);
+  		xd.lockSwipeToPrev(true);
+  	}
+  	if(xd.length() <= 1){
+  		xd.lockSwipes(true);
+  	}
+
+  }
 }

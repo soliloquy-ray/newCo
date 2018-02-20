@@ -18,24 +18,16 @@
 </ion-header>
 
 
-<ion-content padding>
-	<ion-row class="headers" *ngIf="customerList.length > 0">
-		<ion-col col-4>
-			Name
-		</ion-col>
-		<ion-col col-4>
-			Address
-		</ion-col>
-		<ion-col col-4>
-			Description
-		</ion-col>
-	</ion-row>
-	<ion-row *ngFor="let cust of customerList">
-		<ion-col col-4>{{cust?.name}}</ion-col>
-		<ion-col col-4>{{cust?.properties.address}}</ion-col>
-		<ion-col col-4>{{cust?.description}}</ion-col>
+<ion-content>
+	<span class="cstmr" *ngFor="let cust of customerList">
+		<ion-icon name="person"></ion-icon>
+		<div>
+			<ion-row class="name">{{cust?.name}}</ion-row>
+			<ion-row class="address">{{cust?.properties.address}}</ion-row>
+			<ion-row class="desc">{{cust?.description}}</ion-row>
+		</div>
 		
-	</ion-row>
+	</span>
 
 	<p class="notice"  *ngIf="customerList.length < 1">
 		There's no one here!
