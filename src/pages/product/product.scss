@@ -1,5 +1,6 @@
 page-product {
 
+	font-family:'Century Gothic', sans-serif, Helvetica !important;
 	ion-header{
 		ion-navbar ion-title, .toolbar-ios ion-title{
 			padding-left:12px;
@@ -15,6 +16,9 @@ page-product {
 		}
 
 		button[ion-button]{
+			&.back-button{
+				display:none;
+			}
 			float:right;
 			height:3.5vh;
 			background-color: rgba(30,30,30,0.9);

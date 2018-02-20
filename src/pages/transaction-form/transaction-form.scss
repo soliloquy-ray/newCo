@@ -1,4 +1,6 @@
 page-transaction-form {
+	
+	font-family:"Century Gothic", sans-serif, Helvetica !important;
 
 	ion-header{
 
@@ -52,16 +54,18 @@ page-transaction-form {
     			margin:1.5vh 0 0vh;
     		}
 
-    		ion-input, ion-textarea{
+    		ion-input, ion-textarea, select{
     			color:#333;
     			flex:none;
     			display: block;
     			clear:both;
     			width:100%;
-    			padding:1vh;
+    			padding:1vw;
+    			background-color:#fff;
+    			margin:1vh 0 0;
+
     			input{
     				margin:0;
-    				background-color:#fff;
     				height:3.5vh;
     			}
     			textarea{
@@ -69,9 +73,16 @@ page-transaction-form {
     				background-color:#fff;
     				height:7vh;
     			}
+
+    			&[type=number]{
+    				width:20vw;
+    				input{
+    					padding-right:0;
+    				}
+    			}
     		}
 
-    		span.productname, select, input[type=number]{
+    		span.productname{
     			flex:none;
     			display: inline-block;
     			padding:0.5vh;
@@ -80,19 +91,14 @@ page-transaction-form {
     			color:#fff;
     		}
 
-    		&>input{
-    			color:#eee;
-    			&[type=number]{
-    				color:#333;
-    				height:4.5vh;
-    				margin:0.75vh 0 0 0.75vh;
-    			}
-    		}
-
 
     		img{
-    			max-height:5vh;
+    			max-height:7.5vh;
+    			min-height:7.5vh;
+    			width:7.5vh;
     			margin:0 2vw;
+    			object-fit:cover;
+    			object-position:center;
     		}
 
 			button[ion-button].save, button[ion-button].cancel{

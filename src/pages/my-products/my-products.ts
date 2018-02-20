@@ -63,7 +63,7 @@ export class MyProductsPage {
   }
 
   toProductPage(prodData){
-  	this.navCtrl.push(ProductPage,{id:prodData.id, data:prodData});
+  	this.navCtrl.setRoot(ProductPage,{id:prodData.id, data:prodData});
   }
 
   clean(prodArr:Array<any>) : Array<any>{

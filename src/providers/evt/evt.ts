@@ -82,6 +82,16 @@ export class EvtProvider {
 
   }
 
+  completeTransaction(id:string = ''): Promise<any>{
+    return this.getUserContext().then(user=>{
+      return user.$init.then(usr=>{
+        return usr.thng(id).property("status").update("paid").then(res=>{
+          usr.thng(id).property("paidAt").update(Date.now())
+        });
+      }).catch(console.info);
+    }).catch(console.info);
+  }
+
   updateThngProperty(id:string = '', propQ:[{key:string,value:string}]) : Promise<any>{
     return this.getUserContext().then(user=>{
       return user.$init.then(usr=>{

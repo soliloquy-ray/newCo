@@ -49,13 +49,13 @@ export class TransactionFormPage {
   			productId: this.transact.productId,
   			customerId: this.transact.customerId,
   			amount: this.transact.amt,
+  			status: "pending"
   		};
   	let th = {
   		name: new Date().getTime(),
   		product: this.transId,
   		properties: prodProperties,
-  		description: this.transact.description,
-  		identifiers:{status:"pending"}
+  		description: this.transact.description
   	}
   	let self = this;
 

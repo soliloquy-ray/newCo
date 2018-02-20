@@ -1,6 +1,6 @@
 page-transaction-list {
 
-	font-family:"Century Gothic" !important;
+	font-family:"Century Gothic", sans-serif, Helvetica !important;
 
 	ion-header{
 		ion-navbar ion-title, .toolbar-ios ion-title{
@@ -103,6 +103,20 @@ page-transaction-list {
 						}
 					}
 				}
+
+				&.dt-bar{
+					margin-top:1vh;
+				}
+			}
+
+			button.payment-btn{
+				height:4vh;
+				background-color: rgba(30,30,30,0.9);
+				color:#fff;
+				font-size:2.15vh;
+				display:inline-block;
+				clear:both;
+				margin-top:2vh;
 			}
 		}
 
