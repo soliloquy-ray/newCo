@@ -16,6 +16,8 @@ import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 export class ProductPage {
 	prod : any;
 	@ViewChildren(Slides, {read: ElementRef}) slideList: QueryList<Slides>;
+	imageList : Array<any> = [];
+	targ = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	if(navParams.get('data')){
@@ -25,7 +27,8 @@ export class ProductPage {
   	}else{
   		//fetch from EVT directly
   	}
-  	console.log(this.prod);
+  	this.imageList = this.prod.properties.images;
+  	console.log(this.prod,this.imageList);
   }
 
   ionViewDidLoad() {
@@ -46,6 +49,10 @@ export class ProductPage {
   		xd.lockSwipes(true);
   	}
 
+  }
+
+  toggleBG(i){
+  	this.targ = i;
   }
 
 }

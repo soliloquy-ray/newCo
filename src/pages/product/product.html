@@ -5,17 +5,17 @@
   Ionic pages and navigation.
 -->
 
-<ion-content padding>
+<ion-content padding parallax-header>
 
-	<section class="image">
-	  <ion-slides slidesPerView="auto" spaceBetween="0" zoom="false" (ionSlideDrag)="elec_sld($event)">
+	<div class="header-image image" [ngStyle]="{'background-image':'url('+prod?.properties.images[targ]+')'}">
+	  <!--ion-slides slidesPerView="auto" spaceBetween="0" zoom="false" (ionSlideDrag)="elec_sld($event)">
 		<ion-slide *ngFor = "let img of prod.properties.images">
 			<img src="{{img}}"/>
 		</ion-slide>
-	  </ion-slides>
-	</section>
+	  </ion-slides-->
+	</div>
 
-	<div class="body">
+	<div class="body main-content">
 		<p class="brand">
 			{{prod?.properties.brandname}}
 		</p>
@@ -26,10 +26,16 @@
 			{{prod?.properties.price  | currency:'PHP':'symbol-narrow':'1.2-2'}}
 		</p>
 
-		<b class="head-desc">Description</b>
+		<b class="head-desc">Product Description</b>
 		<p class="desc">
 			{{prod?.description}}
 		</p>
+
+		<span class="oth-img" *ngIf="prod?.properties.images.length > 1">
+			<b class="head-desc">Other images</b>
+			<button *ngFor="let bgs of prod.properties.images; let i = index" class="bg-toggler" ion-button (click)="toggleBG(i)"><img [src]="prod?.properties.images[i]"/></button>
+		</span>
+ 
 	</div>
 
 </ion-content>

@@ -22,6 +22,7 @@ import { EvtProvider } from '../providers/evt/evt';
 
 import { HttpModule } from '@angular/http';
 import { ComponentsModule } from '../components/components.module';
+import { DirectivesModule } from '../directives/directives.module';
 
 const pages = [
             MyApp,
@@ -40,6 +41,7 @@ const pages = [
   declarations: pages,
   imports: [
     ComponentsModule,
+    DirectivesModule,
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp,{}, {

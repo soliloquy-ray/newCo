@@ -7,18 +7,20 @@ page-product {
 			padding:0 !important;
 		}
 
-		section.image{
+		div.image{
 			display:block;
-			height:35vh;
+			height:40vh;
 			width:100%;
 			clear:both;
 			position:relative;
+			background-position:center;
+			background-repeat:no-repeat;
 			ion-slides{
-				max-height:35vh;
-				min-height:35vh;
+				max-height:40vh;
+				min-height:40vh;
 				ion-slide{
-					max-height:35vh;
-					min-height:35vh;
+					max-height:40vh;
+					min-height:40vh;
 
 					.slide-zoom{
 						position:relative;
@@ -26,8 +28,8 @@ page-product {
 
 						img{
 							position: absolute;
-							max-height:35vh;
-							min-height:35vh;
+							max-height:40vh;
+							min-height:40vh;
 							width:100%;
 							top:0;
 							left:0;
@@ -42,9 +44,10 @@ page-product {
 
 		div.body{
 			width:100%;
-			display: block;
+			display: inline-block;
 			clear:both;
-			padding:2vw 3vw;
+			padding:3vw 4vw;
+			background-color:#fff;
 
 			p{
 				font-family:'Century Gothic';
@@ -52,7 +55,6 @@ page-product {
 				display:block;
 				&.name{
 					font-size:2.5vh;
-					font-weight:bolder;
 					text-transform: capitalize;
 					width:50%;
 					display:inline-block;
@@ -63,10 +65,18 @@ page-product {
 					width:50%;
 					display:inline-block;
 					float:left;
+					text-align:right;
 				}
 
 				&.desc{
 					font-size:1.75vh;
+					min-height:20vh;
+				}
+
+				&.brand{
+					font-weight:bolder;
+					font-size:1.75vh;
+					letter-spacing:0.5vw;
 				}
 			}
 
@@ -75,6 +85,36 @@ page-product {
 				display:inline-block;
 				clear:both;
 				margin-top:5vh;
+			}
+
+			span.oth-img{
+				position:relative;
+				display:block;
+				width:100%;
+				text-align:left;
+				button[ion-button]{
+					background-color:transparent;
+					height:12.5vw;
+					width:12.5vw;
+					display:inline-table;
+					position:relative;
+					padding:0.5vw;
+					&>span{
+						position:relative;
+						display:block;
+						height:100%;
+						width:100%;
+						flex:none;
+						img{
+							position:absolute;
+							height:100%;
+							width:100%;
+							top:0;
+							left:0;
+							border-radius:4px;
+						}
+					}
+				}
 			}
 		}
 

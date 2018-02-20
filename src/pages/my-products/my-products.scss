@@ -2,11 +2,12 @@ page-my-products {
 
 	font-family:'Century Gothic', sans-serif, Helvetica !important;
 	ion-header{
-		.toolbar-ios ion-title{
+		ion-navbar ion-title, .toolbar-ios ion-title{
 			padding-left:12px;
 			padding-right:12px;
 			.toolbar-title{
 				text-align:left;
+				line-height:8.5vw;
 			}
 		}
 		ion-icon{
@@ -17,7 +18,7 @@ page-my-products {
 		button[ion-button]{
 			float:right;
 			height:3.5vh;
-			background-color: forestgreen;
+			background-color: rgba(30,30,30,0.9);
 			color:#fff;
 			font-size:2.15vh;
 		}
@@ -27,7 +28,7 @@ page-my-products {
 
 		.scroll-content{
 			background-color:rgba(119,136,153,0.45);
-			text-align:left;
+			text-align:center;
 			padding:1vw !important;
 		}
 
@@ -111,8 +112,11 @@ page-my-products {
 						left:0;
 						background-color:rgba(30,30,30,0.9);
 						color:#fff;
-						width:50%;
+						width:30vw;
 						border-radius: 4vw 0.5vw;
+						text-align:center;
+						padding-left:1.5vw;
+						padding-right:1.5vw;
 					}
 					&.desc{
 						height:8vw;
