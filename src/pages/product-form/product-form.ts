@@ -1,5 +1,5 @@
 import { Component , Renderer2} from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 
 import { EvtProvider } from "../../providers/evt/evt";
 
@@ -21,7 +21,7 @@ export class ProductFormPage {
 
  	productId = "U4kcDVP2eDsRtKawwkyMdBbr";
 	product:any = {"productName":"","productPrice":0,"brandName":"","productDescription":"","productImage":[]};
-  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public render: Renderer2, private evt: EvtProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public render: Renderer2, private evt: EvtProvider, private loader: LoadingController) {
   	this.render.addClass(viewCtrl.pageRef().nativeElement, 'custom-popup');
   }
 
@@ -47,9 +47,17 @@ export class ProductFormPage {
   		description: this.product.productDescription
   	}
   	let self = this;
+    let load = this.loader.create({
+      spinner: 'crescent',
+      dismissOnPageChange: false,
+      showBackdrop: true,
+      content: `Saving...`,
+      enableBackdropDismiss:false});
+    load.present();
   	this.evt.getUserContext().then(user=>{
   		user.$init.then(usr=>{
   			usr.thng().create(th).then(console.log).catch(console.info);
+  			load.dismiss();
   			self.dismiss();
   		}).catch(console.info);
   	}).catch(console.info);

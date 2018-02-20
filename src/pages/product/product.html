@@ -5,14 +5,30 @@
   Ionic pages and navigation.
 -->
 
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+  		<ion-icon name="menu" menuToggle></ion-icon>
+  		Product
+  	</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
 <ion-content padding parallax-header>
 
-	<div class="header-image image" [ngStyle]="{'background-image':'url('+prod?.properties.images[targ]+')'}">
+	<div class="header-image image" [ngStyle]="{'background-image':'url('+imageList[targ]+')'}">
 	  <!--ion-slides slidesPerView="auto" spaceBetween="0" zoom="false" (ionSlideDrag)="elec_sld($event)">
 		<ion-slide *ngFor = "let img of prod.properties.images">
 			<img src="{{img}}"/>
 		</ion-slide>
 	  </ion-slides-->
+	  <button ion-button class="add_img">
+	  	+
+	  	<ion-icon name="images"></ion-icon>
+	  	<input type="file" accept="image/*" (change)="perf($event)" multiple="true">
+	  </button>
 	</div>
 
 	<div class="body main-content">
@@ -26,15 +42,15 @@
 			{{prod?.properties.price  | currency:'PHP':'symbol-narrow':'1.2-2'}}
 		</p>
 
+		<span class="oth-img" *ngIf="imageList.length > 1">
+			<b class="head-desc">Other images</b>
+			<button *ngFor="let bgs of imageList; let i = index" class="bg-toggler" ion-button (click)="toggleBG(i)"><img [src]="imageList[i]"/></button>
+		</span>
+
 		<b class="head-desc">Product Description</b>
 		<p class="desc">
 			{{prod?.description}}
 		</p>
-
-		<span class="oth-img" *ngIf="prod?.properties.images.length > 1">
-			<b class="head-desc">Other images</b>
-			<button *ngFor="let bgs of prod.properties.images; let i = index" class="bg-toggler" ion-button (click)="toggleBG(i)"><img [src]="prod?.properties.images[i]"/></button>
-		</span>
  
 	</div>
 

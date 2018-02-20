@@ -48,6 +48,7 @@ export class TransactionListPage {
     		//console.log(self.transactions[ind].properties.productid,self.prodList);
     		self.transactions[ind].productName = self.prodList[self.transactions[ind].properties.productid].name;
     		self.transactions[ind].customerName = self.customerList[self.transactions[ind].properties.customerid].name;
+    		self.transactions[ind].productImg = self.prodList[self.transactions[ind].properties.productid].properties.images[0];
     	})
     }).catch(console.info)
   }

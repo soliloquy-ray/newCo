@@ -82,6 +82,20 @@ export class EvtProvider {
 
   }
 
+  updateThngProperty(id:string = '', propQ:[{key:string,value:string}]) : Promise<any>{
+    return this.getUserContext().then(user=>{
+      return user.$init.then(usr=>{
+        return usr.thng(id)
+                  .property()
+                  .update(propQ)
+                  .then(thng=>{
+                    console.log(thng);
+                  })
+                  .catch(console.info);
+      }).catch(console.info);
+    }).catch(console.info);
+  }
+
   getThngData(id:string = '') : Promise<any>{
     let self = this;
     return (

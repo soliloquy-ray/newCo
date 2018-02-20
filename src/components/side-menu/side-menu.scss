@@ -1,13 +1,15 @@
 side-menu {
+	font-family: 'Century Gothic' !important;
 
-	ion-content.content.content-md{
+	ion-content.content{
 		background-color: #333;
 		color:#fff;
 
 		&>.scroll-content{
+		background-color: #333;
 			max-height: calc(100% - 3.8em);
 			&>ion-list{
-				margin-top:46px;
+				margin-top:7vh;
 				a{
 					text-decoration: none;
 					color:inherit;
@@ -24,7 +26,7 @@ side-menu {
 						&>.input-wrapper{
 
 							ion-label{
-								font-family: HelveticaNeue-Light;
+								font-family: 'Century Gothic';
 								font-size: 16px;
 								color:rgb(240,119,33);
 							}

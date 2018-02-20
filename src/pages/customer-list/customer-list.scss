@@ -1,4 +1,5 @@
 page-customer-list {
+	font-family:'Century Gothic', sans-serif, Helvetica !important;
 
 	ion-header{
 		ion-navbar ion-title, .toolbar-ios ion-title{
@@ -17,10 +18,9 @@ page-customer-list {
 		button[ion-button]{
 			float:right;
 			height:3.5vh;
-			background-color: forestgreen;
+			background-color: rgba(30,30,30,0.9);
 			color:#fff;
 			font-size:2.15vh;
-			font-family:"Calibri";
 		}
 	}
 
@@ -32,12 +32,13 @@ page-customer-list {
 		span.cstmr{
 			padding:2vw;
 			box-shadow: 0 0 1px 0 rgba(30,30,30,0.4);
-			background-color:rgba(70,130,180,0.8);
+			color:#fff;
 			margin-bottom:0.25vh;
 			display:table;
 			width:100%;
 			clear:both;
 			position:relative;
+			background-color:#333;
 
 			ion-icon{
 				width:20vw;
@@ -49,6 +50,7 @@ page-customer-list {
 				background-color:#fff;
 				box-shadow: 0 0 1px 0 #333;
 				border-radius:20vw;
+				color:#333;
 			}
 
 			div{
@@ -71,7 +73,7 @@ page-customer-list {
 					&.address{
 						margin-bottom:1vw;
 						font-weight:bolder;
-						color:#55C;
+						color:#fff;
 					}
 
 					&.desc{

@@ -41,10 +41,11 @@ page-product-form {
     div.form{
     	padding:1.5vh;
     	background-color:inherit;
-    	ion-row{
 
+    	ion-row{
+    		font-family:"Century Gothic";
     		ion-label{
-    			color:#999;
+    			color:#fff;
     			flex:none;
     			display:block;
     			clear:both;
@@ -58,16 +59,25 @@ page-product-form {
     			display: block;
     			clear:both;
     			width:100%;
-    			padding:1vh;
+    			padding:1vw;
+    			background-color:#fff;
+    			margin:1vh 0 0;
+
     			input{
     				margin:0;
-    				background-color:#fff;
     				height:3.5vh;
     			}
     			textarea{
     				margin:0;
     				background-color:#fff;
     				height:7vh;
+    			}
+
+    			&[type=number]{
+    				width:20vw;
+    				input{
+    					padding-right:0;
+    				}
     			}
     		}
 
@@ -81,7 +91,7 @@ page-product-form {
 				font-size:1.9vh;
 				line-height:1.5;
 				border-radius:3px;
-				height:4.5vh;
+				height:4.25vh;
 				background-color:#fff;
 				color:#333;
 				text-transform:capitalize;
@@ -101,6 +111,7 @@ page-product-form {
 					display:block;
 					margin:0;
 					position:relative;
+					font-family:"Century Gothic";
 				}
 			}
     	}
@@ -126,7 +137,7 @@ ion-modal.custom-popup .modal-wrapper {
     margin-left: auto;
     margin-right: auto;
   width: 95%;
-  height: 475px;
+  height: 72.5vh !important;
   display: block;
   top: calc(5vh);
 

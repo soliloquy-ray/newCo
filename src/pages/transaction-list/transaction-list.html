@@ -16,27 +16,17 @@
 </ion-header>
 
 
-<ion-content padding>
-	<ion-row class="headers" *ngIf="transactions?.length > 0">
-		<ion-col col-3>
-			Product
+<ion-content>
+	<ion-row class="cstmr" *ngFor="let trans of transactions">
+		<ion-col col-4>
+			<img [src]="trans?.productImg"/>
+			<p class="name">{{trans?.productName}}</p>
 		</ion-col>
-		<ion-col col-3>
-			Customer
+		<ion-col col-8>
+			<p class="cust-bar">Purchased by: <b>{{trans?.customerName}}</b></p>
+			<p class="unit-bar"><b>{{trans?.properties.amount}}</b> units</p>
+			<p class="status-bar">Status: <b [ngClass]="{'paid':trans.identifiers.status == 'paid'}">{{trans?.identifiers.status}}</b></p>
 		</ion-col>
-		<ion-col col-3>
-			Quantity
-		</ion-col>
-		<ion-col col-3>
-			Status
-		</ion-col>
-	</ion-row>
-	<ion-row *ngFor="let trans of transactions">
-		<ion-col col-3>{{trans?.productName}}</ion-col>
-		<ion-col col-3>{{trans?.customerName}}</ion-col>
-		<ion-col col-3>{{trans?.properties.amount}}</ion-col>
-		<ion-col col-3>{{trans?.identifiers.status}}</ion-col>
-		
 	</ion-row>
 
 	<p class="notice"  *ngIf="transactions.length < 1">
