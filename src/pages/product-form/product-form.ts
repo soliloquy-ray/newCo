@@ -44,7 +44,8 @@ export class ProductFormPage {
   		product: this.productId,
   		name: this.product.productName,
   		properties: prodProperties,
-  		description: this.product.productDescription
+  		description: this.product.productDescription,
+  		tags: ['active']
   	}
   	let self = this;
     let load = this.loader.create({

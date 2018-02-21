@@ -22,6 +22,7 @@ export class TransactionFormPage {
  	customerList : any = [];
 	transact:any = {productId:"",customerId:"",amt:0,description:""};
 	product:any;
+	disableCtrl: boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public render: Renderer2, private evt: EvtProvider, private loader: LoadingController) {
   	this.render.addClass(this.viewCtrl.pageRef().nativeElement, 'custom-popup');
   	this.product = this.navParams.get('product');
@@ -45,6 +46,7 @@ export class TransactionFormPage {
   }
 
   save(){
+  	this.disableCtrl = true;
   	let prodProperties = {
   			productId: this.transact.productId,
   			customerId: this.transact.customerId,
@@ -55,7 +57,8 @@ export class TransactionFormPage {
   		name: new Date().getTime(),
   		product: this.transId,
   		properties: prodProperties,
-  		description: this.transact.description
+  		description: this.transact.description,
+  		tags: ['active']
   	}
   	let self = this;
 
@@ -71,8 +74,10 @@ export class TransactionFormPage {
   		user.$init.then(usr=>{
   			usr.thng().create(th).then(res=>{
   				load.dismiss();
+  				self.evt.addPurchaseCount(prodProperties.productId,prodProperties.amount).then(console.info).catch(console.info);
   			}).catch(console.info);
   			self.dismiss();
+  			self.disableCtrl = false;
   		}).catch(console.info);
   	}).catch(console.info);
   }

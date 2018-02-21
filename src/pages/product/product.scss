@@ -125,12 +125,21 @@ page-product {
 				&.desc{
 					font-size:1.75vh;
 					min-height:17.5vh;
+					line-height:3.5vh;
 				}
 
 				&.brand{
 					font-weight:bolder;
 					font-size:1.75vh;
 					letter-spacing:0.5vw;
+				}
+
+				&.purchases{
+					font-size:2vh;
+					width:100%;
+					display: inline-block;
+					clear:both;
+					margin-top:2.5vh;
 				}
 			}
 

@@ -97,4 +97,27 @@ export class TransactionListPage {
 	  });
   }
 
+  deleteTrans(id:string = ''){
+  	let self = this;
+  	let alt = this.alert.create({
+  		title: "Confirm delete",
+  		message: "Are you sure you want to delete this transaction? This action cannot be undone.",
+  		buttons: [
+  			{
+  				text: 'Cancel',
+  				role: 'cancel'
+  			},
+  			{
+  				text: 'Ok',
+  				handler: ()=>{
+  					self.evt.deleteThng(id).then(()=>{self.toastUp()});
+  				}
+  			}
+  		]
+
+  	});
+  	alt.present();
+
+  }
+
 }

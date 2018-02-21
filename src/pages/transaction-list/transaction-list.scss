@@ -47,6 +47,17 @@ page-transaction-list {
 			position:relative;
 			color:#333;
 
+			ion-icon.delete-me{
+				position:absolute;
+				top:1vh;
+				right:1vh;
+				height:3vh;
+				width:3vh;
+				display:block;
+				font-size:3vh;
+				z-index:5;
+			}
+
 
 			ion-col{
 				&[col-4]{

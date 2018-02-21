@@ -21,8 +21,9 @@
 <ion-content padding>
 
 <div class="productBox" *ngFor = "let prod of productList">
+  <ion-icon name="close-circle" class="delete-me" (click)="deleteTrans(prod?.id)"></ion-icon>
 
-  <ion-slides slidesPerView="auto" spaceBetween="0" zoom="false" (ionSlideDrag)="elec_sld($event)">
+  <ion-slides slidesPerView="auto" spaceBetween="0" zoom="false" loop="true" (ionSlideDrag)="elec_sld($event)">
 	<ion-slide *ngFor = "let img of prod.properties.images">
 		<img src="{{img}}"/>
 	</ion-slide>

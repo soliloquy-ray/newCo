@@ -42,12 +42,13 @@ export class CustomerFormPage {
   		product: this.custId,
   		name: this.cust.fullName,
   		properties: prodProperties,
-  		description: this.cust.description
+  		description: this.cust.description,
+  		tags: ['active']
   	}
   	let self = this;
   	this.evt.getUserContext().then(user=>{
   		user.$init.then(usr=>{
-  			usr.thng().create(th).then(console.log).catch(console.info);
+  			usr.thng().create(th).then(localStorage.removeItem('customerList')).catch(console.info);
   			self.dismiss();
   		}).catch(console.info);
   	}).catch(console.info);

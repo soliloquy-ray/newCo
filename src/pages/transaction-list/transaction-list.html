@@ -18,6 +18,7 @@
 
 <ion-content>
 	<ion-row class="cstmr" *ngFor="let trans of transactions">
+		<ion-icon name="close-circle" class="delete-me" (click)="deleteTrans(trans?.id)"></ion-icon>
 		<ion-col col-4>
 			<img [src]="trans?.productImg"/>
 			<p class="name">{{trans?.productName}}</p>

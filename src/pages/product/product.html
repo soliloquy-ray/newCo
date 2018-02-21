@@ -47,6 +47,12 @@
 			<button *ngFor="let bgs of imageList; let i = index" class="bg-toggler" ion-button (click)="toggleBG(i)"><img [src]="imageList[i]"/></button>
 		</span>
 
+		<span *ngIf = "prod?.properties.purchases">
+			<p class="purchases">
+				This item has been purchased {{prod?.properties.purchases}} times!
+			</p>
+		</span>
+
 		<b class="head-desc">Product Description</b>
 		<p class="desc">
 			{{prod?.description}}

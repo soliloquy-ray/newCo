@@ -92,6 +92,18 @@ export class EvtProvider {
     }).catch(console.info);
   }
 
+  addPurchaseCount(id:string = '',ct : number = 0): Promise<any>{
+    return this.getUserContext().then(user=>{
+      return user.$init.then(usr=>{
+        return usr.thng(id).read().then(th=>{
+          let purchases = th.properties.purchases || 0;
+          let total = (purchases*1) + (ct*1);
+          return th.property("purchases").update(total);
+        });
+      }).catch(console.info);
+    }).catch(console.info);
+  }
+
   updateThngProperty(id:string = '', propQ:[{key:string,value:string}]) : Promise<any>{
     return this.getUserContext().then(user=>{
       return user.$init.then(usr=>{
@@ -112,7 +124,7 @@ export class EvtProvider {
       this.getUserContext().then(user=>{
         return (
           user.$init.then(usr=>{
-            return usr.thng(id).read({params:{filter:`product=${self.productId}`}})
+            return usr.thng(id).read({params:{filter:`product=${self.productId}&tags=active`}})
           })
         )
       })
@@ -125,7 +137,7 @@ export class EvtProvider {
       this.getUserContext().then(user=>{
         return (
           user.$init.then(usr=>{
-            return usr.thng(id).read({params:{filter:`product=${self.customerId}`}})
+            return usr.thng(id).read({params:{filter:`product=${self.customerId}&tags=active`}})
           })
         )
       })
@@ -138,10 +150,24 @@ export class EvtProvider {
       this.getUserContext().then(user=>{
         return (
           user.$init.then(usr=>{
-            return usr.thng(id).read({params:{filter:`product=${self.transId}`}})
+            return usr.thng(id).read({params:{filter:`product=${self.transId}&tags=active`}})
           })
         )
       })
+    );
+  }
+
+  deleteThng(id:string = '?'){
+    let self = this;
+    return (
+      this.getUserContext().then(user=>{
+        return (
+          user.$init.then(usr=>{
+            let tags = ["deleted"];
+            return usr.thng(id).update({tags:tags})
+          }).catch()
+        ).catch(console.info)
+      }).catch(console.info)
     );
   }
 

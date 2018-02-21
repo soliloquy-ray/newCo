@@ -62,6 +62,18 @@ page-my-products {
 			&:nth-of-type(2n){
 				margin:1vw 0 0 1vw;
 			}
+
+			ion-icon.delete-me{
+				position:absolute;
+				top:1vh;
+				right:1vh;
+				height:3vh;
+				width:3vh;
+				display:block;
+				font-size:3vh;
+				z-index:5;
+			}
+			
 			ion-slides{
 				.swiper-slide{
 					max-height:44.5vw;
@@ -119,10 +131,14 @@ page-my-products {
 						padding-right:1.5vw;
 					}
 					&.desc{
-						height:8vw;
 						font-size:1.7vh;
+						width:100%;
+						max-width:30vw;
 						font-weight:bold;
 						font-style:italic;
+						overflow:hidden;
+						white-space:nowrap;
+						text-overflow:ellipsis;
 					}
 				}
 

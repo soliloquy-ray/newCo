@@ -1,5 +1,5 @@
 import { Component, QueryList, ViewChildren, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ModalOptions, LoadingController, MenuController, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ModalOptions, LoadingController, MenuController, Slides, AlertController, ToastController } from 'ionic-angular';
 
 import { ProductFormPage } from "../product-form/product-form";
 import { ProductPage } from "../product/product";
@@ -25,12 +25,17 @@ export class MyProductsPage {
 	productList: any;
 	@ViewChildren(Slides, {read: ElementRef}) slideList: QueryList<Slides>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
-  	private evt: EvtProvider, private loader: LoadingController, private menu: MenuController) {
+  	private evt: EvtProvider, private loader: LoadingController, private menu: MenuController, private alert : AlertController, private toast: ToastController) {
   }
 
   ngAfterViewInit() {
     console.log('ionViewDidLoad MyProductsPage');
   	this.menu.close();
+  	this.initPage();
+  }
+
+  initPage(){
+
   	this.fetchProductsFromEVT();
   	if(typeof localStorage.customerList == "undefined" || localStorage.customerList === "[]"){
 
@@ -119,7 +124,7 @@ export class MyProductsPage {
 
 
   elec_sld($event){
-  	let xd : Slides = $event;
+  	/*let xd : Slides = $event;
   	if(xd.getActiveIndex() == xd.length()-1){
   		xd.lockSwipeToNext(true);
   		xd.lockSwipeToPrev(false);
@@ -132,5 +137,52 @@ export class MyProductsPage {
   		xd.lockSwipes(true);
   	}
 
+	*/
+	return ;
+  }
+
+  deleteTrans(id:string = ''){
+  	let self = this;
+  	let alt = this.alert.create({
+  		title: "Confirm delete",
+  		message: "Are you sure you want to delete this product? This action cannot be undone.",
+  		buttons: [
+  			{
+  				text: 'Cancel',
+  				role: 'cancel'
+  			},
+  			{
+  				text: 'Ok',
+  				handler: ()=>{
+
+				    let load = self.loader.create({
+				      spinner: 'crescent',
+				      dismissOnPageChange: false,
+				      showBackdrop: true,
+				      content: `Deleting...`,
+				      enableBackdropDismiss:false});
+				    load.present();
+  					self.evt.deleteThng(id).then(()=>{self.toastUp(); load.dismiss();});
+  				}
+  			}
+  		]
+
+  	});
+  	alt.present();
+
+  }
+
+  toastUp(){
+  	let self = this;
+	  let toast = this.toast.create({
+	    message: 'Product has been deleted',
+	    duration: 3000,
+	    position: 'top'
+	  });
+
+	  toast.present();
+	  toast.onDidDismiss(()=>{
+	  	self.initPage();
+	  });
   }
 }
