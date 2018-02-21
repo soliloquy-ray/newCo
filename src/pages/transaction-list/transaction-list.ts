@@ -52,6 +52,7 @@ export class TransactionListPage {
     		self.transactions[ind].productName = self.prodList[self.transactions[ind].properties.productid].name;
     		self.transactions[ind].customerName = self.customerList[self.transactions[ind].properties.customerid].name;
     		self.transactions[ind].productImg = self.prodList[self.transactions[ind].properties.productid].properties.images[0];
+    		self.transactions[ind].totalCost = self.prodList[self.transactions[ind].properties.productid].properties.price * self.transactions[ind].properties.amount;
     		if(self.transactions[ind].properties.status == "paid"){
     			self.transactions[ind].updDate = new Date(self.transactions[ind].properties.paidat).toDateString();
     		}

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { MyProductsPage } from "../my-products/my-products";
+
 import { EvtProvider } from "../../providers/evt/evt";
 
 import * as Quill from "quill";
@@ -14,6 +16,10 @@ export class HomePage {
   ql: any;
   constructor(public navCtrl: NavController, private evt: EvtProvider) {
     console.log(Quill);
+  }
+
+  ionViewWillEnter(){
+    this.navCtrl.setRoot(MyProductsPage);
   }
 
   ngOnInit(){

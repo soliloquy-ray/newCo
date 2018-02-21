@@ -92,6 +92,11 @@ page-transaction-list {
 
 				&.unit-bar{
 					margin:0 0 2vh;
+					a{
+						color:rgba(30,30,30,0.9);
+						text-decoration:none;
+						font-weight:bolder;
+					}
 				}
 
 				&.status-bar{

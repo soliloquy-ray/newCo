@@ -24,7 +24,7 @@
 		</ion-col>
 		<ion-col col-8>
 			<p class="cust-bar">Purchased by: <b>{{trans?.customerName}}</b></p>
-			<p class="unit-bar"><b>{{trans?.properties.amount}}</b> units</p>
+			<p class="unit-bar"><b>{{trans?.properties.amount}}</b> units for <a>{{trans?.totalCost |  currency:'PHP':'symbol-narrow':'1.2-2'}}</a></p>
 			<p class="status-bar">Status: <b [ngClass]="{'paid':trans.properties.status == 'paid'}">{{trans?.properties.status}}</b></p>
 			<button ion-button (click)="showConfirm(trans.id)" class="payment-btn" *ngIf="trans.properties.status != 'paid'">Payment Done</button>
 			<p class="dt-bar" *ngIf="trans.properties.status == 'paid'">

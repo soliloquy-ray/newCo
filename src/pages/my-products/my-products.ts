@@ -90,9 +90,9 @@ export class MyProductsPage {
 
 
     let viewModal = this.modalCtrl.create(TransactionFormPage, {product : prod}, videoModalOptions);
-    /*viewModal.onDidDismiss(()=>{
+    viewModal.onDidDismiss(()=>{
     	self.navCtrl.setRoot(TransactionListPage);
-    })*/
+    })
     viewModal.present();
     console.log("openModal");
 
