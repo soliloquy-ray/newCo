@@ -92,8 +92,11 @@ export class TransactionListPage {
 	  });
 
 	  toast.present();
-	  toast.onDidDismiss(()=>{
-	  	self.initTrans();
+	  toast.onDidDismiss((val)=>{
+	  	console.log(val);
+	  	if(val){
+	  		self.initTrans();
+	  	}
 	  });
   }
 

@@ -40,9 +40,8 @@ export class TransactionFormPage {
 
   }
 
-  dismiss() {
-    let data = { 'foo': 'bar' };
-    this.viewCtrl.dismiss(data);
+  dismiss(status :boolean = false) {
+    this.viewCtrl.dismiss(status);
   }
 
   save(){
@@ -76,7 +75,7 @@ export class TransactionFormPage {
   				load.dismiss();
   				self.evt.addPurchaseCount(prodProperties.productId,prodProperties.amount).then(console.info).catch(console.info);
   			}).catch(console.info);
-  			self.dismiss();
+  			self.dismiss(true);
   			self.disableCtrl = false;
   		}).catch(console.info);
   	}).catch(console.info);

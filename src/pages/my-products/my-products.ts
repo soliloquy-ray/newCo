@@ -95,8 +95,11 @@ export class MyProductsPage {
 
 
     let viewModal = this.modalCtrl.create(TransactionFormPage, {product : prod}, videoModalOptions);
-    viewModal.onDidDismiss(()=>{
-    	self.navCtrl.setRoot(TransactionListPage);
+    viewModal.onDidDismiss((val)=>{
+    	console.log(val);
+    	if(val){	
+    	    self.navCtrl.setRoot(TransactionListPage);
+    	}
     })
     viewModal.present();
     console.log("openModal");
@@ -115,8 +118,10 @@ export class MyProductsPage {
 
 
     let viewModal = this.modalCtrl.create(ProductFormPage, {data : videoData}, videoModalOptions);
-    viewModal.onDidDismiss(()=>{
-    	self.fetchProductsFromEVT();
+    viewModal.onDidDismiss((val)=>{
+    	if(val){
+    		self.fetchProductsFromEVT();
+    	}
     })
     viewModal.present();
     console.log("openModal");

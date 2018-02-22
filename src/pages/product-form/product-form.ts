@@ -29,9 +29,8 @@ export class ProductFormPage {
     console.log('ionViewDidLoad ProductFormPage');
   }
 
-  dismiss() {
-    let data = { 'foo': 'bar' };
-    this.viewCtrl.dismiss(data);
+  dismiss(status: boolean = false) {
+    this.viewCtrl.dismiss(status);
   }
 
   save(){
@@ -59,7 +58,7 @@ export class ProductFormPage {
   		user.$init.then(usr=>{
   			usr.thng().create(th).then(console.log).catch(console.info);
   			load.dismiss();
-  			self.dismiss();
+  			self.dismiss(true);
   		}).catch(console.info);
   	}).catch(console.info);
   }
