@@ -35,7 +35,7 @@ page-product {
 
 		div.image{
 			display:block;
-			height:40vh;
+			height:90vh;
 			width:100%;
 			clear:both;
 			position:relative;
@@ -44,37 +44,54 @@ page-product {
 
 			button[ion-button]{
 				position:absolute;
-				top:2vh;
-				right:2vh;
-				height:4.5vh;
-				width:12.5vw;
-				color:#fff;
-				background-color:rgba(30,30,30,0.9);
-				box-shadow:none;
-				input[type=file]{
-					width:12.5vw;
+				&.add_img{
+					top:2vh;
+					right:2vh;
 					height:4.5vh;
-					position:absolute;
-					top:0;
-					right:0;
-					opacity:0;
-					display:block;
+					width:12.5vw;
+					color:#fff;
+					background-color:rgba(30,30,30,0.9);
+					box-shadow:none;
+					input[type=file]{
+						width:12.5vw;
+						height:4.5vh;
+						position:absolute;
+						top:0;
+						right:0;
+						opacity:0;
+						display:block;
+
+					}
+
+					span{
+						font-size:2vh;
+						ion-icon{
+							margin-left:1vw;
+						}
+					}
 
 				}
 
-				span{
-					font-size:2vh;
+				&.view_more{
+					bottom:2vh;
+					left:0;
+					right:0;
+					margin:auto;
+					background-color:transparent;
+					box-shadow:none;
+					color:#dedede;
+					width:100%;
 					ion-icon{
-						margin-left:1vw;
+						margin:0 3vw;
 					}
 				}
 			}
-			ion-slides{
-				max-height:40vh;
-				min-height:40vh;
+			/*ion-slides{
+				max-height:90vh;
+				min-height:90vh;
 				ion-slide{
-					max-height:40vh;
-					min-height:40vh;
+					max-height:90vh;
+					min-height:90vh;
 
 					.slide-zoom{
 						position:relative;
@@ -82,8 +99,8 @@ page-product {
 
 						img{
 							position: absolute;
-							max-height:40vh;
-							min-height:40vh;
+							max-height:90vh;
+							min-height:90vh;
 							width:100%;
 							top:0;
 							left:0;
@@ -92,7 +109,7 @@ page-product {
 						}
 					}
 				}
-			}
+			}*/
 			box-shadow:0 0 1px 0 #333;
 		}
 

@@ -16,9 +16,9 @@
 
 </ion-header>
 
-<ion-content padding parallax-header>
+<ion-content padding parallax-header (window:resize)="changeup($event)">
 
-	<div class="header-image image" [ngStyle]="{'background-image':'url('+imageList[targ]+')'}">
+	<div class="header-image image" [ngStyle]="{'background-image':'url('+imageList[targ]+')', 'height':heighter}">
 	  <!--ion-slides slidesPerView="auto" spaceBetween="0" zoom="false" (ionSlideDrag)="elec_sld($event)">
 		<ion-slide *ngFor = "let img of prod.properties.images">
 			<img src="{{img}}"/>
@@ -28,6 +28,12 @@
 	  	+
 	  	<ion-icon name="images"></ion-icon>
 	  	<input type="file" accept="image/*" (change)="perf($event)" multiple="true">
+	  </button>
+
+	  <button ion-button class="view_more">
+	  	<ion-icon name="arrow-dropdown"></ion-icon>
+	  	View more
+	  	<ion-icon name="arrow-dropdown"></ion-icon>
 	  </button>
 	</div>
 

@@ -25,6 +25,7 @@ export class ProductPage {
 	imageList : Array<any> = [];
 	propSnap: {} = {};
 	targ = 0;
+	heighter : any = "90vh;"
 	@ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private evt: EvtProvider, private sanitizer:DomSanitizer) {
@@ -55,6 +56,16 @@ export class ProductPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductPage');
+  }
+
+  changeup($event){
+  	console.log($event);
+  	console.log(window.innerHeight, document.body.clientHeight);
+  }
+
+  ngAfterViewInit(){
+  	console.log(window.innerHeight, document.body.clientHeight);
+  	this.heighter = (window.innerHeight - 44)+"px";
   }
 
   elec_sld($event){
