@@ -75,7 +75,9 @@ export class ProductPage {
 
   toggleBG(i){
   	this.targ = i;
-  	this.content.scrollToTop();
+  	setTimeout(()=>{
+  		this.content.scrollToTop();
+  	},500);
   }
 
   perf($event){
