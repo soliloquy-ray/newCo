@@ -1,5 +1,7 @@
-import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { Component, ViewChildren, QueryList, ElementRef, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides, Content } from 'ionic-angular';
+
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { EvtProvider } from "../../providers/evt/evt";
 
@@ -23,15 +25,18 @@ export class ProductPage {
 	imageList : Array<any> = [];
 	propSnap: {} = {};
 	targ = 0;
+	@ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private evt: EvtProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private evt: EvtProvider, private sanitizer:DomSanitizer) {
   	if(navParams.get('data')){
   		this.prod = navParams.get('data');
 	  	this.imageList = this.prod.properties.images;
 	  	this.propSnap = this.prod.properties;
+	  	this.prod.description = this.sanitizer.bypassSecurityTrustHtml(this.prod.description.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/\s\s+/, ''));
 	  	console.log(this.prod,this.imageList);
   	}else if(typeof localStorage.prodList == "string" && localStorage.prodList != "" && localStorage.prodList != "[]" && localStorage.prodList != "{}"){
-  		this.prod = JSON.parse(localStorage.prodList)[navParams.get('id')];  		
+  		this.prod = JSON.parse(localStorage.prodList)[navParams.get('id')];  
+	  	this.prod.description = this.sanitizer.bypassSecurityTrustHtml(this.prod.description.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/\s\s+/, ''));		
 	  	this.imageList = this.prod.properties.images;
 	  	this.propSnap = this.prod.properties;
 	  	console.log(this.prod,this.imageList);
@@ -40,6 +45,7 @@ export class ProductPage {
   		let self = this;
   		this.evt.getThngData(navParams.get('id')).then(thng=>{
   			self.prod = thng;
+	  		self.prod.description = self.sanitizer.bypassSecurityTrustHtml(self.prod.description.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/\s\s+/, ''));
 		  	self.imageList = eval(thng.properties.images);
 		  	self.propSnap = self.prod.properties;
 		  	console.log(self.prod,self.imageList,thng);
@@ -69,6 +75,7 @@ export class ProductPage {
 
   toggleBG(i){
   	this.targ = i;
+  	this.content.scrollToTop();
   }
 
   perf($event){
