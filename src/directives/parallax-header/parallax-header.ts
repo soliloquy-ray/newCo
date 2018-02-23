@@ -37,9 +37,13 @@ export class ParallaxHeaderDirective {
     }
  
     onContentScroll(ev){
-        ev.domWrite(() => {
-            this.updateParallaxHeader(ev);
-        });
+    	try{
+	        ev.domWrite(() => {
+	            this.updateParallaxHeader(ev);
+	        });
+	    }catch(e){
+	    	console.info(e);
+	    }
  
     }
  

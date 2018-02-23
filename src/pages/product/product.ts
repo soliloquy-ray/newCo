@@ -86,9 +86,13 @@ export class ProductPage {
 
   toggleBG(i){
   	this.targ = i;
-  	setTimeout(()=>{
-  		this.content.scrollToTop();
-  	},500);
+
+  	this.content.scrollToTop();
+  }
+
+  scrollingInTheDeep($event){
+  	//console.log($event);
+  	this.content.scrollTo(0,this.heighter.replace(/[^0-9]/g,""),300);
   }
 
   perf($event){
