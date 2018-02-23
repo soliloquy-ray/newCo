@@ -83,20 +83,21 @@ export class TransactionListPage {
   	alt.present();
   }
 
-  toastUp(){
+  toastUp(del : boolean = false){
   	let self = this;
+  	let msg = 'Transaction completed successfully';
+  	if(del){
+  		msg = 'Transaction has been deleted.';
+  	}
 	  let toast = this.toast.create({
-	    message: 'Transaction completed successfully',
+	    message: msg,
 	    duration: 3000,
 	    position: 'top'
 	  });
 
 	  toast.present();
 	  toast.onDidDismiss((val)=>{
-	  	console.log(val);
-	  	if(val){
-	  		self.initTrans();
-	  	}
+	  	self.initTrans();
 	  });
   }
 
@@ -113,7 +114,7 @@ export class TransactionListPage {
   			{
   				text: 'Ok',
   				handler: ()=>{
-  					self.evt.deleteThng(id).then(()=>{self.toastUp()});
+  					self.evt.deleteThng(id).then(()=>{self.toastUp(true)});
   				}
   			}
   		]
