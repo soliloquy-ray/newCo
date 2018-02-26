@@ -160,7 +160,7 @@ export class EvtProvider {
   deleteThng(id:string = '?'){
     let self = this;
     return (
-      this.getUserContext().then(user=>{
+      self.getUserContext().then(user=>{
         return (
           user.$init.then(usr=>{
             let tags = ["deleted"];

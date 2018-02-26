@@ -35,7 +35,8 @@ export class TransactionFormPage {
   	this.customerList = [];
   	let tArr = JSON.parse(localStorage.customerList);
   	Object.keys(tArr).forEach((val,ind)=>{
-  		this.customerList.push(tArr[val]);
+  		tArr[val]['id'] = val;
+  		self.customerList.push(tArr[val]);
   	});
 
   }

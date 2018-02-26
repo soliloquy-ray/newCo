@@ -120,13 +120,13 @@ ion-modal.custom-popup ion-backdrop {
 //     position:absolute;
 // }
 
-ion-modal.custom-popup .modal-wrapper {
+ion-modal.custom-popup.cs-modal.show-page>div.modal-wrapper {
   left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
   width: 95%;
-  height: 475px;
+  height: 85vh;
   display: block;
   top: calc(5vh);
 

@@ -23,7 +23,15 @@
 		<ion-input clearInput="true" type="text" name="customerName" id="customerName" [(ngModel)]="cust.fullName"></ion-input>
 	</ion-row>
 	<ion-row>
-		<ion-label>Address *</ion-label>
+		<ion-label>Mobile Number </ion-label>
+		<ion-input clearInput="true" type="number" name="customerMobile" id="customerMobile" [(ngModel)]="cust.mobile"></ion-input>
+	</ion-row>
+	<ion-row>
+		<ion-label>Email </ion-label>
+		<ion-input clearInput="true" type="email" name="customerEmail" id="customerEmail" [(ngModel)]="cust.email"></ion-input>
+	</ion-row>
+	<ion-row>
+		<ion-label>Address </ion-label>
 		<ion-input clearInput="true" type="text" name="customerAddress" id="customerAddress" [(ngModel)]="cust.address"></ion-input>
 	</ion-row>
 	<ion-row>

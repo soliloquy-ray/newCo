@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ModalOptions, LoadingController, MenuController, AlertController, ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController, AlertController, ToastController} from 'ionic-angular';
 
-import { CustomerFormPage } from "../customer-form/customer-form";
+import { ProductPage } from "../product/product";
 
 import { EvtProvider } from "../../providers/evt/evt";
 
@@ -22,8 +22,7 @@ export class TransactionListPage {
 	transactions: any = [];
 	customerList: any = [];
 	prodList: any = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
-  	private evt: EvtProvider, private loader: LoadingController, private menu: MenuController, private alert: AlertController, private toast:ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private evt: EvtProvider, private loader: LoadingController, private menu: MenuController, private alert: AlertController, private toast:ToastController) {
   }
 
   ngAfterViewInit() {
@@ -56,8 +55,13 @@ export class TransactionListPage {
     		if(self.transactions[ind].properties.status == "paid"){
     			self.transactions[ind].updDate = new Date(self.transactions[ind].properties.paidat).toDateString();
     		}
+    		console.log(self.transactions);
     	})
     }).catch(console.info)
+  }
+
+  viewProduct(id:string=''){
+  	this.navCtrl.setRoot(ProductPage,{id:id},{animate:true,direction:"right"});
   }
 
   showConfirm(id){
@@ -74,7 +78,16 @@ export class TransactionListPage {
   			{
   				text: 'Ok',
   				handler: ()=>{
-  					self.evt.completeTransaction(id).then(()=>{self.toastUp()});
+				    let load = self.loader.create({
+				      spinner: 'crescent',
+				      dismissOnPageChange: false,
+				      showBackdrop: true,
+				      content: `Processing...`,
+				      enableBackdropDismiss:false});
+				    load.present();
+  					self.evt.completeTransaction(id)
+  							.then(()=>{self.toastUp();load.dismiss();})
+  							.catch(()=>{load.dismiss()});
   				}
   			}
   		]
@@ -91,7 +104,7 @@ export class TransactionListPage {
   	}
 	  let toast = this.toast.create({
 	    message: msg,
-	    duration: 3000,
+	    duration: 1500,
 	    position: 'top'
 	  });
 
@@ -114,7 +127,16 @@ export class TransactionListPage {
   			{
   				text: 'Ok',
   				handler: ()=>{
-  					self.evt.deleteThng(id).then(()=>{self.toastUp(true)});
+				    let load = self.loader.create({
+				      spinner: 'crescent',
+				      dismissOnPageChange: false,
+				      showBackdrop: true,
+				      content: `Processing...`,
+				      enableBackdropDismiss:false});
+				    load.present();
+  					self.evt.deleteThng(id)
+  							.then(()=>{self.toastUp(true);load.dismiss();})
+  							.catch(()=>{load.dismiss()});
   				}
   			}
   		]

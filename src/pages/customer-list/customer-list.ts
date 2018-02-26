@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ModalController, ModalOptions, Loa
 import { CustomerFormPage } from "../customer-form/customer-form";
 
 import { EvtProvider } from "../../providers/evt/evt";
+import { FirebaseProvider } from "../../providers/firebase/firebase";
 
 /**
  * Generated class for the CustomerListPage page.
@@ -21,13 +22,13 @@ export class CustomerListPage {
 
 	customerList: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
-  	private evt: EvtProvider, private loader: LoadingController, private menu: MenuController) {
+  	private evt: EvtProvider, private loader: LoadingController, private menu: MenuController, private fire: FirebaseProvider) {
   }
 
   ngAfterViewInit() {
   	this.fetchCustFromEVT();
   	this.menu.close();
-    console.log('ionViewDidLoad CustomerListPage');
+    console.log('ionViewDidLoad CustomerListPage', this.evt);
   }
 
   fetchCustFromEVT(){
@@ -39,8 +40,18 @@ export class CustomerListPage {
       content: `Loading Data...`,
       enableBackdropDismiss:false});
     load.present();
-  	this.evt.getCustomerData().then(prodList =>{
+  	/*this.evt.getCustomerData().then(prodList =>{
   		self.customerList = prodList;
+  		console.log(self.customerList);
+  		load.dismiss();
+  	}).catch(console.info);*/
+  	this.fire.getAllUsers().then(prodList => {
+  		Object.keys(prodList).forEach((val,ind)=>{
+  			if(prodList[val]['status'] == "active"){
+  				self.customerList.push(prodList[val]);
+  			}
+  		});
+
   		console.log(self.customerList);
   		load.dismiss();
   	}).catch(console.info);
@@ -50,7 +61,8 @@ export class CustomerListPage {
   openModal(){
     const videoModalOptions : ModalOptions = {
       showBackdrop:true,
-      enableBackdropDismiss:true
+      enableBackdropDismiss:true,
+      cssClass: "cs-modal"
     };
 
     const   videoData = { 'foo': 'bar' };
@@ -58,8 +70,10 @@ export class CustomerListPage {
 
 
     let viewModal = this.modalCtrl.create(CustomerFormPage, {data : videoData}, videoModalOptions);
-    viewModal.onDidDismiss(()=>{
-    	self.fetchCustFromEVT();
+    viewModal.onDidDismiss(bo=>{
+    	if(bo){
+    		self.fetchCustFromEVT();
+    	}
     })
     viewModal.present();
     console.log("openModal");

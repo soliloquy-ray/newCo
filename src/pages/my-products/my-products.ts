@@ -7,6 +7,7 @@ import { TransactionFormPage } from "../transaction-form/transaction-form";
 import { TransactionListPage } from "../transaction-list/transaction-list";
 
 import { EvtProvider } from "../../providers/evt/evt";
+import { FirebaseProvider } from "../../providers/firebase/firebase";
 
 /**
  * Generated class for the MyProductsPage page.
@@ -25,7 +26,7 @@ export class MyProductsPage {
 	productList: any;
 	@ViewChildren(Slides, {read: ElementRef}) slideList: QueryList<Slides>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
-  	private evt: EvtProvider, private loader: LoadingController, private menu: MenuController, private alert : AlertController, private toast: ToastController) {
+  	private evt: EvtProvider, private loader: LoadingController, private menu: MenuController, private alert : AlertController, private toast: ToastController, private fire: FirebaseProvider) {
   }
 
   ngAfterViewInit() {
@@ -38,7 +39,7 @@ export class MyProductsPage {
 
   	this.fetchProductsFromEVT();
   	if(typeof localStorage.customerList == "undefined" || localStorage.customerList === "[]"){
-
+/*
 	  	this.evt.getCustomerData().then(prodList =>{
 	  		let custList = {};
 	  		prodList.forEach((val,ind)=>{
@@ -49,6 +50,21 @@ export class MyProductsPage {
 	  			localStorage.customerList = JSON.stringify(res);	
 	  		})
 	  	}).catch(console.info);
+	  	*/
+
+  	this.fire.getAllUsers().then(prodList => {
+  		let custList = {};
+  		Object.keys(prodList).forEach((val,ind)=>{
+  			if(prodList[val]['status'] == "active"){
+  				custList[val] = prodList[val];
+  			}
+  		});
+
+  		Promise.resolve(custList).then(res=>{
+  			localStorage.customerList = JSON.stringify(custList);
+  		});
+  		
+  	}).catch(console.info);
   	}
   }
 
@@ -68,7 +84,7 @@ export class MyProductsPage {
   }
 
   toProductPage(prodData){
-  	this.navCtrl.setRoot(ProductPage,{id:prodData.id, data:prodData});
+  	this.navCtrl.setRoot(ProductPage,{id:prodData.id, data:prodData},{animate: true, direction: 'forward'});
   }
 
   clean(prodArr:Array<any>) : Array<any>{

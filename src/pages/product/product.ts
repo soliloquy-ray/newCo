@@ -64,7 +64,7 @@ export class ProductPage {
   }
 
   ngAfterViewInit(){
-  	console.log(window.innerHeight, document.body.clientHeight);
+  	//console.log(window.innerHeight, document.body.clientHeight);
   	this.heighter = (window.innerHeight - 44)+"px";
   }
 

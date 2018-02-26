@@ -19,7 +19,7 @@
 <ion-content>
 	<ion-row class="cstmr" *ngFor="let trans of transactions">
 		<ion-icon name="close-circle" class="delete-me" (click)="deleteTrans(trans?.id)"></ion-icon>
-		<ion-col col-4>
+		<ion-col col-4 (tap)="viewProduct(trans?.properties.productid)">
 			<img [src]="trans?.productImg"/>
 			<p class="name">{{trans?.productName}}</p>
 		</ion-col>
@@ -27,7 +27,7 @@
 			<p class="cust-bar">Purchased by: <b>{{trans?.customerName}}</b></p>
 			<p class="unit-bar"><b>{{trans?.properties.amount}}</b> units for <a>{{trans?.totalCost |  currency:'PHP':'symbol-narrow':'1.2-2'}}</a></p>
 			<p class="status-bar">Status: <b [ngClass]="{'paid':trans.properties.status == 'paid'}">{{trans?.properties.status}}</b></p>
-			<button ion-button (click)="showConfirm(trans.id)" class="payment-btn" *ngIf="trans.properties.status != 'paid'">Payment Done</button>
+			<button ion-button (click)="showConfirm(trans.id)" class="payment-btn" *ngIf="trans.properties.status != 'paid'">Confirm Payment</button>
 			<p class="dt-bar" *ngIf="trans.properties.status == 'paid'">
 				paid on <b>{{trans.updDate}}</b>
 			</p>

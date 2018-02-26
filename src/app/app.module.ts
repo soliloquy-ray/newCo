@@ -21,8 +21,10 @@ import { TransactionListPage } from '../pages/transaction-list/transaction-list'
 import { EvtProvider } from '../providers/evt/evt';
 
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from '../components/components.module';
 import { DirectivesModule } from '../directives/directives.module';
+import { FirebaseProvider } from '../providers/firebase/firebase';
 
 const pages = [
             MyApp,
@@ -43,6 +45,7 @@ const pages = [
     ComponentsModule,
     DirectivesModule,
     BrowserModule,
+    HttpClientModule,
     HttpModule,
     IonicModule.forRoot(MyApp,{}, {
       links: [
@@ -61,7 +64,9 @@ const pages = [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    EvtProvider
+    HttpClientModule,
+    EvtProvider,
+    FirebaseProvider
   ]
 })
 export class AppModule {}

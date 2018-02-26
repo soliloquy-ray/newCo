@@ -35,7 +35,7 @@
 		<p class="brand">{{prod?.properties.brandname}}</p>
 		<p class="name">{{prod?.name}}</p>
 		<p class="price">{{prod?.properties.price  | currency:'PHP':'symbol-narrow':'1.2-2'}}</p>
-		<p class="desc">{{prod?.description}}</p>
+		<p class="desc" [innerHTML] = "prod?.description"></p>
 		<ion-row>
 			<ion-col col-6>
 				<a class="desc" (click)="transact(prod)">Transact</a>
