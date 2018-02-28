@@ -1,4 +1,4 @@
-import { Component, ViewChildren, QueryList, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content } from 'ionic-angular';
 
 import { DomSanitizer } from '@angular/platform-browser';
@@ -53,6 +53,7 @@ export class VisionPage {
   ngAfterViewInit(){
   	this.heighter = (window.innerHeight)+"px";
   	this.render.setProperty(this.vid.nativeElement,"muted","muted");
+  	this.vid.nativeElement.play();
   }
 
   changeup($event){

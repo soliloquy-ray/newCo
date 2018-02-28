@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {Http, HttpModule} from "@angular/http";
-import * as Tropo from 'tropo-webapi/lib/tropo-webapi';
 
 @Component({
   selector: 'page-home',
@@ -11,7 +9,7 @@ export class HomePage {
 
   ql: any;
   tropo : any;
-  constructor(public navCtrl: NavController, private http:Http) {
+  constructor(public navCtrl: NavController) {
   }
 
   ionViewWillEnter(){

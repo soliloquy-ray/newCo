@@ -1,7 +1,6 @@
 import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Slides, LoadingController } from 'ionic-angular';
 
-import { EvtProvider } from '../../providers/evt/evt';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 
 declare var require: any;
@@ -31,7 +30,7 @@ export class ImageTrackerComponent {
   @Output() uploaded: EventEmitter<any> = new EventEmitter();
   isLoggedIn: boolean = false;
 
-  constructor(private loader: LoadingController, private evt: EvtProvider, private fire: FirebaseProvider) {
+  constructor(private loader: LoadingController, private fire: FirebaseProvider) {
     console.log('Hello ImageTrackerComponent Component');
     this.text = 'Hello World';
     /*let d = new Date();
