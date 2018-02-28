@@ -1,4 +1,6 @@
 page-product-form {
+	font-family:'pmc'!important;
+	font-weight:bolder !important;
 
 	ion-header{
 
@@ -43,7 +45,6 @@ page-product-form {
     	background-color:inherit;
 
     	ion-row{
-    		font-family:"Century Gothic";
     		ion-label{
     			color:#fff;
     			flex:none;
@@ -137,7 +138,7 @@ ion-modal.custom-popup.show-page>div.modal-wrapper {
     margin-left: auto;
     margin-right: auto;
   width: 95%;
-  height: 75vh;
+  height: 77.5vh;
   display: block;
   top: calc(5vh);
 

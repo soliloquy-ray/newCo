@@ -56,9 +56,9 @@ export class VisionPage {
   	this.render.setProperty(this.vid.nativeElement,"loop","loop");
   	
   	setTimeout(()=>{
-	  	this.vid.nativeElement.play();
+	  	this.vid.nativeElement.play().then(console.log).catch(console.info);
 	  	console.log(this.vid.nativeElement);
-  	},300);
+  	},1000);
   }
 
   changeup($event){

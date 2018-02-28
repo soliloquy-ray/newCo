@@ -1,5 +1,8 @@
 page-customer-form {
 
+	font-family:'pmc'!important;
+	font-weight:bolder !important;
+
 	ion-header{
 
 		.toolbar-ios ion-title{
@@ -85,7 +88,7 @@ page-customer-form {
 				background-color:#fff;
 				color:#333;
 				text-transform:capitalize;
-				margin:3vh 2vw 0 0;
+				margin:1.5vh 2vw 0 0;
 				width:auto;
 
 				ion-icon{
@@ -101,6 +104,8 @@ page-customer-form {
 					display:block;
 					margin:0;
 					position:relative;
+					font-family:'pmc';
+					font-weight:bolder;
 				}
 			}
     	}
@@ -126,7 +131,7 @@ ion-modal.custom-popup.cs-modal.show-page>div.modal-wrapper {
     margin-left: auto;
     margin-right: auto;
   width: 95%;
-  height: 85vh;
+  height: 87.5vh;
   display: block;
   top: calc(5vh);
 

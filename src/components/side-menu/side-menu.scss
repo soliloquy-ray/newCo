@@ -1,5 +1,7 @@
 side-menu {
-	font-family: 'Century Gothic' !important;
+	
+	font-family:'pmc'!important;
+	font-weight:bolder !important;
 
 	ion-content.content{
 		background-color: #333;
@@ -26,7 +28,7 @@ side-menu {
 						&>.input-wrapper{
 
 							ion-label{
-								font-family: 'Century Gothic';
+								font-family: 'pmc';
 								font-size: 16px;
 								color:rgb(240,119,33);
 							}
@@ -44,7 +46,8 @@ side-menu {
 						}
 						&>.item-inner{
 							ion-label{
-								font-family: HelveticaNeue-Bold;
+								font-family: 'pmc';
+								font-weight:bolder;
 								font-size: 2.35vh;
 								color:#ccc;
 							}

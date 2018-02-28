@@ -1,6 +1,7 @@
 page-my-products {
 
-	font-family:'Century Gothic', sans-serif, Helvetica !important;
+	font-family:'pmc'!important;
+	font-weight:bolder !important;
 	ion-header{
 		ion-navbar ion-title, .toolbar-ios ion-title{
 			padding-left:12px;
@@ -21,6 +22,7 @@ page-my-products {
 			background-color: rgba(30,30,30,0.9);
 			color:#fff;
 			font-size:2.15vh;
+			font-weight:bolder;
 		}
 	}
 
@@ -73,7 +75,7 @@ page-my-products {
 				font-size:3vh;
 				z-index:5;
 			}
-			
+
 			ion-slides{
 				.swiper-slide{
 					max-height:44.5vw;

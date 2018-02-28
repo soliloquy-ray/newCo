@@ -1,6 +1,7 @@
 page-vision {
-
-	font-family:'Century Gothic', sans-serif, Helvetica !important;
+	
+	font-family:'pmc'!important;
+	font-weight:bolder !important;
 	ion-header{
 		ion-navbar ion-title, .toolbar-ios ion-title{
 			padding-left:12px;
@@ -56,7 +57,7 @@ page-vision {
 
 			&:not(.dataLoaded):after{
 				content:"Tap to get started";
-				font-family:"Century Gothic" !important;
+				font-weight:bolder;
 				font-size:5vh;
 				text-align:center;
 				color:#333;
