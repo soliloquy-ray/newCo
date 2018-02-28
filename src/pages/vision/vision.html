@@ -9,8 +9,7 @@
 <ion-content padding parallax-header (window:resize)="changeup($event)">
 	<div class="header-image image" [ngStyle]="{'background-image':'url('+bgImg+')', 'height':heighter}" [ngClass]="{'dataLoaded':dataLoaded}">
 
-		<video loop="true" id="bgVid" preload="auto" #vid *ngIf="!dataLoaded">
-			<source src="../assets/vids/test.mp4" type="video/mp4">
+		<video id="bgVid" #vid *ngIf="!dataLoaded" src="../assets/vids/test.mp4" preload="auto">
 		</video>
 	  <!--ion-slides slidesPerView="auto" spaceBetween="0" zoom="false" (ionSlideDrag)="elec_sld($event)">
 		<ion-slide *ngFor = "let img of prod.properties.images">

@@ -53,7 +53,11 @@ export class VisionPage {
   ngAfterViewInit(){
   	this.heighter = (window.innerHeight)+"px";
   	this.render.setProperty(this.vid.nativeElement,"muted","muted");
-  	this.vid.nativeElement.play();
+  	this.render.setProperty(this.vid.nativeElement,"loop","loop");
+  	
+  	let vd = <HTMLVideoElement> document.getElementById('bgVid');
+  	vd.play();
+  	console.log(vd);
   }
 
   changeup($event){

@@ -15,7 +15,6 @@ export class FirebaseProvider {
   constructor(public http: HttpClient) {
     console.log('Hello FirebaseProvider Provider',firebase);
     this.database = firebase.database();
-    console.log(this.database);
   }
 
   getRoot(){
