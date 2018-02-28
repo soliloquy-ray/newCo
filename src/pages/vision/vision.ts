@@ -55,9 +55,10 @@ export class VisionPage {
   	this.render.setProperty(this.vid.nativeElement,"muted","muted");
   	this.render.setProperty(this.vid.nativeElement,"loop","loop");
   	
-  	let vd = <HTMLVideoElement> document.getElementById('bgVid');
-  	vd.play();
-  	console.log(vd);
+  	setTimeout(()=>{
+	  	this.vid.nativeElement.play();
+	  	console.log(this.vid.nativeElement);
+  	},300);
   }
 
   changeup($event){
