@@ -2,8 +2,10 @@ import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Slides, LoadingController } from 'ionic-angular';
 
 import { EvtProvider } from '../../providers/evt/evt';
+import { FirebaseProvider } from '../../providers/firebase/firebase';
 
-//var sha1 = require('sha1');
+declare var require: any;
+var sha1 = require('sha1');
 import * as loadImage from 'blueimp-load-image';
 
 /**
@@ -29,7 +31,7 @@ export class ImageTrackerComponent {
   @Output() uploaded: EventEmitter<any> = new EventEmitter();
   isLoggedIn: boolean = false;
 
-  constructor(private loader: LoadingController, private evt: EvtProvider) {
+  constructor(private loader: LoadingController, private evt: EvtProvider, private fire: FirebaseProvider) {
     console.log('Hello ImageTrackerComponent Component');
     this.text = 'Hello World';
     /*let d = new Date();
@@ -37,7 +39,7 @@ export class ImageTrackerComponent {
   }
 
   ngOnInit(){
-  	return ;
+  	//console.log(sha1("test"));
   }
 
   ngAfterViewInit(){
@@ -45,7 +47,13 @@ export class ImageTrackerComponent {
   		this.slider.slideTo(this.photoProg.length+1);
   	},300);*/
     let self = this;
-    this.evt.getUserCustomFields().then((cF)=>{
+    this.fire.getAllImages().then(res=>{
+      Object.keys(res).forEach((val,ind)=>{
+         self.photoProg.push(res[val]);
+      });
+      console.log(self.photoProg);
+    }).catch(console.info);
+    /*this.evt.getUserCustomFields().then((cF)=>{
       self.photoProg = cF.photoHistory || [];
       if(self.photoProg.length < 1){
         this.fetchCYGfromStorage();
@@ -59,67 +67,25 @@ export class ImageTrackerComponent {
       },500);
       //console.log(cF,this.today);
       self.canUploadPhoto();
+    });*/
+  }
+
+  getTags(elem){
+    let ret = elem['info']['categorization']['aws_rek_tagging']['data'];
+    console.log(ret);
+    return ret;
+  }
+
+  getOcr(elem){
+    let fT = elem['info']['ocr']['adv_ocr']['data'][0]['fullTextAnnotation']['text'];
+    let tArr = {};
+    let tAno :Array<any> = elem['info']['ocr']['adv_ocr']['data'][0]['textAnnotations'].map((res)=>{
+      return res.description;
     });
-  }
-
-/* transfer to EVT service */
-  patchEVTUserCF(){
-    let self = this;
-    this.evt.getUserCustomFields().then((cF)=>{
-      let nCF = cF || {};
-      nCF.photoHistory = self.photoProg;
-      console.log(nCF);
-      return nCF;
-    })
-    .catch(console.info)
-    .then((cF)=>{
-      let upData = {
-        customFields:cF
-      };
-      console.log(upData);
-      self.evt.getUserContext().then(usr=>{
-        console.log(usr);
-        usr.update(upData).then(console.log).catch(console.info);
-      })
-      .catch(console.info);
-    })
-    .catch(console.info);
-  }
-
-  canUploadPhoto(){
-    let self = this;
-    self.canIHasToday().then(i=>{
-      console.log(i);
-      if(i){
-        self.canAddTodaysPhoto = true;
-        if(localStorage.debugMode === '1'){
-          self.canAddTodaysPhoto = true;
-          self.tstamp = self.getNextAvailablePushDate(); 
-        }
-        //console.log('shouldve used ',self.getNextAvailablePushDate());
-      }
-      else{
-        self.canAddTodaysPhoto = true;
-      }
-    });
-  }
-
-  canIHasToday():PromiseLike<any>{
-    let self = this;
-    return new Promise((resolve,reject)=>{
-      if(typeof localStorage.cygHistory == "undefined" || localStorage.cygHistory === "{}"){
-        resolve(false);
-      }else{
-        let localCpy :Array<any>= JSON.parse(localStorage.cygHistory);
-        resolve(localCpy.find((val)=>{
-          let v1 = self.toLocaleDateString(val.timestamp);
-          let v2 = self.toLocaleDateString(self.tstamp);
-          //console.log(v1,v2,v1==v2);
-          return v1==v2;
-        })
-        );
-      }
-    })
+    tArr[0] = fT;
+    tArr[1] = tAno;
+    console.log(tArr);
+    return tArr;
   }
 
   sliderChanged(event = null){
@@ -188,15 +154,11 @@ export class ImageTrackerComponent {
               // File uploaded successfully
               var response = JSON.parse(xhr.responseText);
               console.log(response);
-              self.photoProg.push({photoUrl:response.secure_url,timestamp:self.tstamp});
+              self.photoProg.push(response);
 
-              self.patchEVTUserCF();
-              self.unlockSlides();
               setTimeout(()=>{
-                self.slider.slideTo(self.photoProg.length-1);
                 localStorage.cygHistory = JSON.stringify(self.photoProg);
-                self.uploaded.emit(true);
-                self.canAddTodaysPhoto = true;
+                self.fire.newImage(response).then(console.log).catch(console.info);
               },500);
               load.dismiss();
             }
@@ -207,55 +169,31 @@ export class ImageTrackerComponent {
           fd.append('public_id', pid);
           fd.append('timestamp', self.tstamp.toString());
           fd.append('tags','browser_upload');
-          fd.append('upload_preset',self.uploadPreset);
+          //fd.append('upload_preset',self.uploadPreset);
+          fd.append('categorization', "aws_rek_tagging");
+          fd.append('auto_tagging','0.6');
+          fd.append('ocr','adv_ocr');
 
           /* no longer need signed uploads */
-          //let secret = "uJkQIneMpHgAJkqho1NLFroqGUg"
+          let secret = "SJN5BGSKv8GOMDJJvQV1c6VDe0Q"
           //let secret = "BBImHLi3cw-Y_NynlbMU3HYyhH0";
-          //fd.append('api_key', '572517737342669'); // 299675785887213 Optional - add tag for image admin in Cloudinary
-          //let signed = sha1('public_id='+pid+'&timestamp='+self.tstamp+secret);
-          //fd.append('signature', signed); // Optional - add tag for image admin in Cloudinary
+          fd.append('api_key', '532699365372897'); // 299675785887213 Optional - add tag for image admin in Cloudinary
+          let signed = sha1('auto_tagging=0.6&categorization=aws_rek_tagging&ocr=adv_ocr&public_id='+pid+'&tags=browser_upload&timestamp='+self.tstamp.toString()+secret);
+          fd.append('signature', signed); // Optional - add tag for image admin in Cloudinary
           xhr.send(fd);
         },
 
         {
           canvas:true,
           orientation:oren,
-          maxWidth:400,
-          maxHeight:400
+          maxWidth:800,
+          maxHeight:800
         }
        )
     });
 
   }
 
-  toLocaleDateString(dt){
-    return new Date(parseInt(dt)).toLocaleDateString();
-  }
 
-  getNextAvailablePushDate(){
-    let dy = eval(localStorage.cygHistory).sort(this.compare);
-    let tmpD = new Date().setDate(new Date(dy[dy.length-1]['timestamp']).getDate() + 1);
-    tmpD = new Date(tmpD).setMonth(new Date(dy[dy.length-1]['timestamp']).getMonth());
-    return tmpD;
-  }
-
-  compare(a:{photoUrl:string,timestamp:any},b:{photoUrl:string,timestamp:any}) {
-    if (a.timestamp < b.timestamp)
-      return -1;
-    if (a.timestamp > b.timestamp)
-      return 1;
-    return 0;
-  }
-
-  fetchCYGfromStorage(){
-    if(localStorage.cygHistory && localStorage.cygHistory !== "{}" && JSON.parse(localStorage.cygHistory)){
-      this.photoProg = JSON.parse(localStorage.cygHistory);
-    }
-  }
-
-  getPhotoCount(){
-    return this.photoProg.length;
-  }
 
 }

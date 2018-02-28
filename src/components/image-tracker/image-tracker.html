@@ -4,11 +4,11 @@
   <ion-slides slidesPerView="auto" spaceBetween="13" zoom="false" (ionSlideDidChange)="sliderChanged($event)" #Slides>
 	<ion-slide *ngFor = "let pho of photoProg; let i=index;let x;">
 		<p class="dayctr">Day {{i+1}}</p>
-		<div class="photo-main"><!-- [ngStyle]="{'background-image':'url('+pho+')'}" -->
-			<img class="i{{i}}" [src]="pho?.photoUrl"/>
+		<div class="photo-main" (tap)="getTags(pho);getOcr(pho);"><!-- [ngStyle]="{'background-image':'url('+pho+')'}" -->
+			<img class="i{{i}}" [src]="pho?.secure_url"/>
 		</div>
 	</ion-slide>
-	<ion-slide class="more-pic" *ngIf="canAddTodaysPhoto">
+	<ion-slide class="more-pic">
 		<p class="dayctr">Day {{photoProg?.length+1}}</p>
 		<div class="photo-main" >
    	 		<input type="file" accept="image/*" (tap)="takePhotoAction($event)" (change)="takePic($event)" capture="camera" /> <!--  [disabled]="!canAddTodaysPhoto || !isLoggedIn" -->

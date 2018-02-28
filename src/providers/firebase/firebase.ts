@@ -66,4 +66,19 @@ export class FirebaseProvider {
   	});
   }
 
+  newImage(imgData): Promise<any>{
+  	let id = Date.now().toString();
+  	return this.database.ref('images/'+id).set(imgData);
+  }
+
+  updateWholeImage(id:string = '',imgData):Promise<any>{
+  	return this.database.ref(`images/${id}`).set(imgData);
+  }
+
+  getAllImages():Promise<any>{
+  	return this.database.ref(`images`).once('value').then((res)=>{
+  		return res.val();
+  	})
+  }
+
 }

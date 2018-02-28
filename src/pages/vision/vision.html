@@ -1,0 +1,46 @@
+<!--
+  Generated template for the VisionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content padding parallax-header (window:resize)="changeup($event)">
+	<div class="header-image image" [ngStyle]="{'background-image':'url('+bgImg+')', 'height':heighter}" [ngClass]="{'dataLoaded':dataLoaded}">
+
+		<video loop="true" autoplay="true" id="bgVid" preload="auto" #vid *ngIf="!dataLoaded">
+			<source src="../assets/vids/test.mp4" type="video/mp4">
+		</video>
+	  <!--ion-slides slidesPerView="auto" spaceBetween="0" zoom="false" (ionSlideDrag)="elec_sld($event)">
+		<ion-slide *ngFor = "let img of prod.properties.images">
+			<img src="{{img}}"/>
+		</ion-slide>
+	  </ion-slides-->
+	  <input type="file" accept="image/*" (change)="takePic($event)" multiple="true" *ngIf="!dataLoaded">
+
+	  <button ion-button class="view_more" (click)="scrollingInTheDeep($event)" *ngIf="dataLoaded">
+	  	<ion-icon name="arrow-dropdown"></ion-icon>
+	  	View more
+	  	<ion-icon name="arrow-dropdown"></ion-icon>
+	  </button>
+	</div>
+
+	<div class="body main-content" [ngClass]="{'dataLoaded':dataLoaded}">
+
+		<section *ngIf = "dataLoaded">
+		<b class="head-desc">Image Tags</b>
+		<ul>
+			<li *ngFor = "let rek of tags">{{rek?.tag}} | {{rek?.confidence * 100 | number:'0.2-2'}}% </li>
+		</ul>
+
+
+		<b class="head-desc">{{texts[1]?.length}} Texts Found</b>
+		<ul>
+			<li *ngFor = "let text of texts[1]">{{text}}</li>
+		</ul>
+ 
+ 		</section>
+	</div>
+
+</ion-content>
