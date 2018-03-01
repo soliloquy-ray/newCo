@@ -72,12 +72,15 @@ export class VisionPage {
   }
 
   getTags(elem){
-    let ret = elem['info']['categorization']['aws_rek_tagging']['data'];
+    let ret = elem['info']['categorization']['imagga_tagging']['data'];
     console.log(ret);
     return ret;
   }
 
   getOcr(elem){
+  	if(typeof elem['info']['ocr']['adv_ocr']['data'][0]['textAnnotations'] == "undefined"){
+  		return [[],[],[]];
+  	}
     let fT = elem['info']['ocr']['adv_ocr']['data'][0]['fullTextAnnotation']['text'];
     let tArr = {};
     let ct:string = "replace";
@@ -92,7 +95,7 @@ export class VisionPage {
     },[]);
     tArr[0] = fT;
     tArr[1] = tAno;
-    tArr[3] = this.dom.bypassSecurityTrustHtml(ct.replace(/(?:\r\n|\r|\n)/g, '<br>&gt;').replace(/\s\s+/, ''));
+    tArr[2] = this.dom.bypassSecurityTrustHtml(ct.replace(/(?:\r\n|\r|\n)/g, '<br>&gt;').replace(/\s\s+/, ''));
     console.log(tArr);
     return tArr;
   }
@@ -152,7 +155,7 @@ export class VisionPage {
           fd.append('public_id', pid);
           fd.append('timestamp', self.tstamp.toString());
           //fd.append('upload_preset',self.uploadPreset);
-          fd.append('categorization', "aws_rek_tagging");
+          fd.append('categorization', "imagga_tagging");
           fd.append('auto_tagging','0.6');
           fd.append('ocr','adv_ocr');
 
@@ -160,7 +163,7 @@ export class VisionPage {
           let secret = "SJN5BGSKv8GOMDJJvQV1c6VDe0Q"
           //let secret = "BBImHLi3cw-Y_NynlbMU3HYyhH0";
           fd.append('api_key', '532699365372897'); // 299675785887213 Optional - add tag for image admin in Cloudinary
-          let signed = sha1('auto_tagging=0.6&categorization=aws_rek_tagging&ocr=adv_ocr&public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
+          let signed = sha1('auto_tagging=0.6&categorization=imagga_tagging&ocr=adv_ocr&public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
           fd.append('signature', signed); // Optional - add tag for image admin in Cloudinary
           xhr.send(fd);
         },

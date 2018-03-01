@@ -30,5 +30,33 @@ ion-menu.menu-enabled.show-menu{
 
 @font-face{
 	font-family:"pmc";
-	src: url("../assets/fonts/lev/zk.otf") format("opentype");
+	src: url("../assets/fonts/lev/js-r.ttf") format("truetype");
+}
+
+ion-loading{
+	.loading-wrapper{
+		font-family:"pmc" !important;
+		background-color:rgb(30,30,30) !important;
+		color:#fff !important;
+	}
+}
+
+ion-alert{
+	.alert-wrapper{
+		background-color:rgb(30,30,30) !important;
+		color:#fff;
+		font-family:"pmc" !important;
+
+	}
+
+	.alert-button-group{
+		button{
+			font-family:"pmc" !important;
+			span{
+
+				color:#fff;
+			}
+
+		}
+	}
 }
