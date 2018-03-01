@@ -29,12 +29,10 @@
 	<div class="body main-content" [ngClass]="{'dataLoaded':dataLoaded}">
 
 		<section *ngIf = "dataLoaded">
-		<b class="head-desc">Image Tags</b>
+
+		<b class="head-desc">{{texts[1]?.length}} Texts Found</b>
 		<ul>
-			<li [ngStyle] = "{'fontSize':'calc(15vh * '+rek?.confidence+')'}" *ngFor = "let rek of tags" (click)="tappedOut($event)" >{{rek?.tag}}
-				<p class="tooltip">- {{rek?.confidence * 100 | number: '0.0-0'}}%</p>
-			</li>
-			<!--li> | {{rek?.confidence * 100 | number:'0.2-2'}}% </li-->
+			<li *ngFor = "let text of texts[1]">{{text}}</li>
 		</ul>
  
  		</section>

@@ -17,6 +17,7 @@ import { CustomerListPage } from '../pages/customer-list/customer-list';
 import { TransactionFormPage } from '../pages/transaction-form/transaction-form';
 import { TransactionListPage } from '../pages/transaction-list/transaction-list';
 import { VisionPage } from '../pages/vision/vision';
+import { OcrPage } from '../pages/ocr/ocr';
 
 
 import { EvtProvider } from '../providers/evt/evt';
@@ -38,7 +39,8 @@ const pages = [
             CustomerListPage,
             TransactionFormPage,
             TransactionListPage,
-            VisionPage
+            VisionPage,
+            OcrPage
           ];
 
 @NgModule({
@@ -58,6 +60,7 @@ const pages = [
         { component: CustomerListPage, name: 'CustomerListPage', segment: 'customers' },
         { component: TransactionListPage, name: 'TransactionListPage', segment: 'transactions' },
         { component: VisionPage, name: 'VisionPage', segment: 'vision' },
+        { component: OcrPage, name: 'OcrPage', segment: 'ocr' },
       ]
     }),
   ],

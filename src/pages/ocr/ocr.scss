@@ -1,4 +1,4 @@
-page-vision {
+page-ocr {
 	
 	font-family:'pmc'!important;
 	font-weight:bolder !important;
@@ -138,7 +138,7 @@ page-vision {
 			width:100%;
 			display: inline-block;
 			clear:both;
-			background-color:lightsteelblue;
+			background-color:#fff;
 
 			&.dataLoaded{
 				padding:3vw 4vw;
@@ -193,31 +193,7 @@ page-vision {
 			ul{
 				padding:0 0 0 1vw;
 				li{
-					//list-style: circle inside;
-					list-style:none;
-					display: inline-block;
-					margin:0 1.5vw;
-					position:relative;
-					border-radius: 4px;
-					p.tooltip{
-					    position: relative;
-					    /*top: -100%;
-					    left: 10%;*/
-					    font-size: 90%;
-					    background-color: rgb(30,30,30);
-					    color: #fff;
-					    display:none;
-					}
-
-					&.sel{
-					    background-color: rgb(30,30,30);
-					    color: #fff;
-					    padding: 1vw;
-
-						p.tooltip{
-							display:inline-block;
-						}
-					}
+					list-style: circle inside;
 				}
 			}
 		}

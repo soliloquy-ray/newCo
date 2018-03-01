@@ -18,10 +18,10 @@ import * as loadImage from 'blueimp-load-image';
 
 @IonicPage()
 @Component({
-  selector: 'page-vision',
-  templateUrl: 'vision.html',
+  selector: 'page-ocr',
+  templateUrl: 'ocr.html',
 })
-export class VisionPage {
+export class OcrPage {
     tstamp = Date.now();
 	cloudName:string = 'cloudstrife';
     uploadPreset: string = 'iqx9xm8u';
@@ -29,7 +29,7 @@ export class VisionPage {
 	prod:any;
 	heighter : any = "90vh";
 	dataLoaded = false;
-	tags: Array<any> = [];
+	texts : any = [];
 	@ViewChild('vid') vid: ElementRef;
 	@ViewChild(Content) content: Content;
   constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private dom: DomSanitizer, private loader:LoadingController, private render: Renderer2) {
@@ -73,7 +73,6 @@ export class VisionPage {
   getTags(elem){
     let ret = elem['info']['categorization']['imagga_tagging']['data'];
     console.log(ret);
-    ret = this.shuffle(ret);
     return ret;
   }
 
@@ -108,32 +107,6 @@ export class VisionPage {
 
   }
 
-  tappedOut($event){
-  	Array.from(document.getElementsByClassName('sel')).forEach((a,ind)=>{
-  		a.classList.remove("sel");
-  	});
-  	$event.target.classList.add("sel");
-  }
-
-  shuffle(array) {
-	  let currentIndex = array.length, temporaryValue, randomIndex;
-
-	  // While there remain elements to shuffle...
-	  while (0 !== currentIndex) {
-
-	    // Pick a remaining element...
-	    randomIndex = Math.floor(Math.random() * currentIndex);
-	    currentIndex -= 1;
-
-	    // And swap it with the current element.
-	    temporaryValue = array[currentIndex];
-	    array[currentIndex] = array[randomIndex];
-	    array[randomIndex] = temporaryValue;
-	  }
-
-	  return array;
-	}
-
 	uploadFile(file) {
     let load = this.loader.create({
       spinner: 'crescent',
@@ -167,7 +140,7 @@ export class VisionPage {
               console.log(response);
 	          self.prod = response;
 	          self.bgImg = response['secure_url'];
-	          self.tags = self.getTags(response);
+	          self.texts = self.getOcr(response);
 	          self.dataLoaded = true;
 
               self.fire.newImage(response).then(console.log).catch(console.info);
