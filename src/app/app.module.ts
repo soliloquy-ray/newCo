@@ -63,7 +63,7 @@ const pages = [
         { component: TransactionListPage, name: 'TransactionListPage', segment: 'transactions' },
         { component: VisionPage, name: 'VisionPage', segment: 'vision' },
         { component: OcrPage, name: 'OcrPage', segment: 'ocr' },
-        { component: NeuralPage, name: 'NeuralPage', segment: 'neural' },
+        { component: NeuralPage, name: 'NeuralPage', segment: 'artwork' },
       ]
     }),
   ],

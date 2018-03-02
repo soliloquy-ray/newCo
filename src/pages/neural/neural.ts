@@ -19,7 +19,7 @@ export class NeuralPage {
 	overlay: any;
 	orig: any;
 	cloudName: string ="cloudstrife";
-	url: string = `https://res.cloudinary.com/${this.cloudName}/image/upload/w_700,h_700,c_fill/`;
+	url: string = `https://res.cloudinary.com/${this.cloudName}/image/upload/w_800,h_800,c_fill/`;
 	art: any = "";
   constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http) {
   	console.log(this);
