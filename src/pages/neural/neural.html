@@ -1,0 +1,33 @@
+<!--
+  Generated template for the NeuralPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content padding parallax-header>
+
+	<div class="header-image image" [ngStyle]="{'display':(art ? 'inline-block' : 'none'), 'background-image':'url('+art?.url+')'}">
+	</div>
+
+	<div class="body main-content">
+		<span class="step">
+			<p><b>Step 1</b> Add the overlay photo</p>
+			<button ion-button *ngIf="!overlay">
+				<ion-icon name="image"></ion-icon>
+				<input type="file" accept="image/*" cloud-btn (frag)="fn($event)"/>
+			</button>
+			<img *ngIf="overlay" [src]="overlay?.secure_url"/>
+		</span>
+		<span class="step">
+			<p><b>Step 2</b> Add the target photo</p>
+			<button ion-button *ngIf="!orig">
+				<ion-icon name="image"></ion-icon>
+				<input type="file" accept="image/*" cloud-btn (frag)="art_transfer($event)"/>
+			</button>
+			<img *ngIf="orig" [src]="orig?.secure_url"/>
+		</span>
+		<!--img *ngIf="art" [src]="art?.url"/-->
+	</div>
+</ion-content>

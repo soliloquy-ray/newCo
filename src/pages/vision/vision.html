@@ -17,7 +17,7 @@
 			<img src="{{img}}"/>
 		</ion-slide>
 	  </ion-slides-->
-	  <input type="file" accept="image/*" (change)="takePic($event)" multiple="true" *ngIf="!dataLoaded">
+	  <input type="file" accept="image/*" (change)="takePic($event)" *ngIf="!dataLoaded">
 
 	  <button ion-button class="view_more" (click)="scrollingInTheDeep($event)" *ngIf="dataLoaded">
 	  	<ion-icon name="arrow-dropdown"></ion-icon>

@@ -1,0 +1,183 @@
+page-neural {
+	
+	font-family:'pmc'!important;
+	font-weight:bolder !important;
+
+	ion-content{
+
+		.scroll-content{
+			padding:0 !important;
+		}
+
+		#bgVid{
+			position:fixed;
+			display:inline-block;
+			top:0;
+			left:0;
+			height:100%;
+			width:100%;
+			z-index:3;
+			object-fit:cover;
+			opacity:0.3;
+		}
+
+		div.image{
+			display:block;
+			height:90vh;
+			width:100%;
+			clear:both;
+			position:relative;
+			background-position:center;
+			background-repeat:no-repeat;
+
+
+			button[ion-button]{
+				position:absolute;
+
+				&.view_more{
+					bottom:2vh;
+					left:0;
+					right:0;
+					margin:auto;
+					background-color:rgba(30,30,30,0.8);
+					box-shadow:none;
+					color:#dedede;
+					width:100%;
+					font-weight:bolder;
+					text-shadow: 1px 1px 2px #000;
+					z-index:5;
+					ion-icon{
+						margin:0 3vw;
+					}
+				}
+			}
+
+
+			input[type=file]{
+				width:100%;
+				height:100%;
+				position:absolute;
+				top:0;
+				left:0;
+				opacity:0;
+				display:block;
+				z-index:5;
+			}
+			/*ion-slides{
+				max-height:90vh;
+				min-height:90vh;
+				ion-slide{
+					max-height:90vh;
+					min-height:90vh;
+
+					.slide-zoom{
+						position:relative;
+						height:100%;
+
+						img{
+							position: absolute;
+							max-height:90vh;
+							min-height:90vh;
+							width:100%;
+							top:0;
+							left:0;
+							object-fit:cover;
+							object-position:center;
+						}
+					}
+				}
+			}*/
+			box-shadow:0 0 1px 0 #333;
+		}
+
+		div.body{
+			width:100%;
+			display: inline-block;
+			clear:both;
+			background-color:#fff;
+			padding:5vw;
+
+			&.dataLoaded{
+				padding:3vw 4vw;
+			}
+
+			span.step{
+				margin:0 0 2.5vh;
+				display:inline-block;
+				width:100%;
+				clear:both;
+			}
+
+
+			p{
+				margin:1vh 0;
+				display:block;
+				&.name{
+					font-size:2.5vh;
+					text-transform: capitalize;
+					width:50%;
+					display:inline-block;
+					float:left;
+				}
+
+				&.price{
+					width:50%;
+					display:inline-block;
+					float:left;
+					text-align:right;
+				}
+
+				&.desc{
+					font-size:1.75vh;
+					min-height:17.5vh;
+					line-height:3.5vh;
+				}
+
+				&.brand{
+					font-weight:bolder;
+					font-size:1.75vh;
+					letter-spacing:0.5vw;
+				}
+
+				&.purchases{
+					font-size:2vh;
+					width:100%;
+					display: inline-block;
+					clear:both;
+					margin-top:2.5vh;
+				}
+			}
+
+			button[ion-button]{
+				display:inline-block;
+				width:auto;
+				position:relative;
+				box-shadow:none;
+				background-color:#333;
+				color:#fff;
+				padding:1vw;
+				border-radius:100%;
+				height:6vh;
+				width:6vh;
+
+				input{
+					position:absolute;
+					top:0;
+					left:0;
+					height:100%;
+					width:100%;
+					opacity:0;
+				}
+				span{
+				}
+
+				ion-icon{
+					font-size:4vh;
+					margin:1vw;
+				}
+			}
+		}
+
+	}
+
+}

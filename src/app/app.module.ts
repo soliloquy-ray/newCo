@@ -18,6 +18,7 @@ import { TransactionFormPage } from '../pages/transaction-form/transaction-form'
 import { TransactionListPage } from '../pages/transaction-list/transaction-list';
 import { VisionPage } from '../pages/vision/vision';
 import { OcrPage } from '../pages/ocr/ocr';
+import { NeuralPage } from '../pages/neural/neural';
 
 
 import { EvtProvider } from '../providers/evt/evt';
@@ -40,7 +41,8 @@ const pages = [
             TransactionFormPage,
             TransactionListPage,
             VisionPage,
-            OcrPage
+            OcrPage,
+            NeuralPage
           ];
 
 @NgModule({
@@ -61,6 +63,7 @@ const pages = [
         { component: TransactionListPage, name: 'TransactionListPage', segment: 'transactions' },
         { component: VisionPage, name: 'VisionPage', segment: 'vision' },
         { component: OcrPage, name: 'OcrPage', segment: 'ocr' },
+        { component: NeuralPage, name: 'NeuralPage', segment: 'neural' },
       ]
     }),
   ],
