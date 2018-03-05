@@ -32,6 +32,7 @@ export class VisionPage {
 	tags: Array<any> = [];
 	@ViewChild('vid') vid: ElementRef;
 	@ViewChild(Content) content: Content;
+	tagging:string = 'google_tagging';
   constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private dom: DomSanitizer, private loader:LoadingController, private render: Renderer2) {
   	/*this.fire.getAllImages().then(res=>{
       Object.keys(res).forEach((val,ind)=>{
@@ -71,7 +72,7 @@ export class VisionPage {
   }
 
   getTags(elem){
-    let ret = elem['info']['categorization']['imagga_tagging']['data'];
+    let ret = elem['info']['categorization'][this.tagging]['data'];
     console.log(ret);
     ret = this.shuffle(ret);
     return ret;
@@ -180,15 +181,14 @@ export class VisionPage {
           fd.append('public_id', pid);
           fd.append('timestamp', self.tstamp.toString());
           //fd.append('upload_preset',self.uploadPreset);
-          fd.append('categorization', "imagga_tagging");
+          fd.append('categorization', self.tagging);
           fd.append('auto_tagging','0.6');
-          fd.append('ocr','adv_ocr');
 
           /* no longer need signed uploads */
           let secret = "SJN5BGSKv8GOMDJJvQV1c6VDe0Q"
           //let secret = "BBImHLi3cw-Y_NynlbMU3HYyhH0";
           fd.append('api_key', '532699365372897'); // 299675785887213 Optional - add tag for image admin in Cloudinary
-          let signed = sha1('auto_tagging=0.6&categorization=imagga_tagging&ocr=adv_ocr&public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
+          let signed = sha1('auto_tagging=0.6&categorization='+self.tagging+'&public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
           fd.append('signature', signed); // Optional - add tag for image admin in Cloudinary
           xhr.send(fd);
         },
