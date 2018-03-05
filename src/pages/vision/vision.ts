@@ -33,6 +33,7 @@ export class VisionPage {
 	@ViewChild('vid') vid: ElementRef;
 	@ViewChild(Content) content: Content;
 	tagging:string = 'google_tagging';
+	floorFont : string = '15vh';
   constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private dom: DomSanitizer, private loader:LoadingController, private render: Renderer2) {
   	/*this.fire.getAllImages().then(res=>{
       Object.keys(res).forEach((val,ind)=>{
@@ -48,6 +49,9 @@ export class VisionPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VisionPage');
+    if(this.tagging == "google_tagging"){
+    	this.floorFont = '10vh';
+    }
   }
 
   ngAfterViewInit(){
@@ -182,13 +186,13 @@ export class VisionPage {
           fd.append('timestamp', self.tstamp.toString());
           //fd.append('upload_preset',self.uploadPreset);
           fd.append('categorization', self.tagging);
-          fd.append('auto_tagging','0.6');
+          fd.append('auto_tagging','0.25');
 
           /* no longer need signed uploads */
           let secret = "SJN5BGSKv8GOMDJJvQV1c6VDe0Q"
           //let secret = "BBImHLi3cw-Y_NynlbMU3HYyhH0";
           fd.append('api_key', '532699365372897'); // 299675785887213 Optional - add tag for image admin in Cloudinary
-          let signed = sha1('auto_tagging=0.6&categorization='+self.tagging+'&public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
+          let signed = sha1('auto_tagging=0.25&categorization='+self.tagging+'&public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
           fd.append('signature', signed); // Optional - add tag for image admin in Cloudinary
           xhr.send(fd);
         },
