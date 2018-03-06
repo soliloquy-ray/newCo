@@ -32,7 +32,7 @@ export class VisionPage {
 	tags: Array<any> = [];
 	@ViewChild('vid') vid: ElementRef;
 	@ViewChild(Content) content: Content;
-	tagging:string = 'google_tagging';
+	tagging:string = 'imagga_tagging';
 	floorFont : string = '15vh';
   constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private dom: DomSanitizer, private loader:LoadingController, private render: Renderer2) {
   	/*this.fire.getAllImages().then(res=>{
