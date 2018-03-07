@@ -35,7 +35,7 @@ export class VisionPage {
 	@ViewChild('vid') vid: ElementRef;
 	@ViewChild(Content) content: Content;
 	tagging:string = 'imagga_tagging';
-	floorFont : string = '5vh';
+	floorFont : string = '3vh';
 	clarifai_app : any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private dom: DomSanitizer, private loader:LoadingController, private render: Renderer2) {
   	/*this.fire.getAllImages().then(res=>{
