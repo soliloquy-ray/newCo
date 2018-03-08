@@ -1,16 +1,17 @@
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Content } from 'ionic-angular';
 
-import { DomSanitizer } from '@angular/platform-browser';
-
 import { FirebaseProvider } from "../../providers/firebase/firebase";
 
 import {keys} from "../../config/keys";
 
 declare var require: any;
-var sha1 = require('sha1');
+var AYLIENTextAPI = require('aylien_textapi');
+var textapi = new AYLIENTextAPI({
+  application_id: keys.aylien.appID,
+  application_key: keys.aylien.key
+});
 
-var clarifai = require('clarifai');
 import * as loadImage from 'blueimp-load-image';
 
 /**
@@ -22,10 +23,10 @@ import * as loadImage from 'blueimp-load-image';
 
 @IonicPage()
 @Component({
-  selector: 'page-clarifai',
-  templateUrl: 'clarifai.html',
+  selector: 'page-aylien',
+  templateUrl: 'aylien.html',
 })
-export class ClarifaiPage {
+export class AylienPage {
     tstamp = Date.now();
 	cloudName:string = keys.cloudinary.cloudName;
     uploadPreset: string = keys.cloudinary.uploadPreset;
@@ -36,31 +37,11 @@ export class ClarifaiPage {
 	tags: Array<any> = [];
 	@ViewChild('vid') vid: ElementRef;
 	@ViewChild(Content) content: Content;
-	tagging:string = 'imagga_tagging';
-	floorFont : string = '4vh';
-	clarifai_app : any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private dom: DomSanitizer, private loader:LoadingController, private render: Renderer2) {
-  	/*this.fire.getAllImages().then(res=>{
-      Object.keys(res).forEach((val,ind)=>{
-         this.prod = res[val];
-         this.bgImg = res[val]['secure_url'];
-         this.tags = this.getTags(res[val]);
-         this.texts = this.getOcr(res[val]);
-         this.dataLoaded = true;
-      });
-      console.log(this.prod,this.bgImg);
-  	})*/
-  	this.clarifai_app = new clarifai.App({
-  		apiKey: keys.clarifai.apiKey
-  	});
-  	console.log(this.clarifai_app);
+	floorFont : string = '0.075vh';
+  constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private loader:LoadingController, private render: Renderer2) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad VisionPage');
-    if(this.tagging == "google_tagging"){
-    	this.floorFont = '10vh';
-    }
   }
 
   ngAfterViewInit(){
@@ -85,40 +66,10 @@ export class ClarifaiPage {
   }
 
   getTags(elem){
-    let ret = elem['info']['categorization'][this.tagging]['data'];
-    console.log(ret);
+    let ret = elem['image-tags']['tags'];
+    //let merged =  [].concat.apply([], ret);
     ret = this.shuffle(ret);
     return ret;
-  }
-
-  getClarifyTags(elem){
-    let ret = elem['outputs'][0]['data']['concepts'];
-    console.log(ret);
-    ret = this.shuffle(ret);
-    return ret;
-  }
-
-  getOcr(elem){
-  	if(typeof elem['info']['ocr']['adv_ocr']['data'][0]['textAnnotations'] == "undefined"){
-  		return [[],[],[]];
-  	}
-    let fT = elem['info']['ocr']['adv_ocr']['data'][0]['fullTextAnnotation']['text'];
-    let tArr = {};
-    let ct:string = "replace";
-    let tAno :Array<any> = elem['info']['ocr']['adv_ocr']['data'][0]['textAnnotations'].reduce((result,res)=>{
-    	if(ct === "replace"){
-    		ct = res.description;
-    	}
-    	else{
-      		result.push(res.description);
-    	}
-    	return result;
-    },[]);
-    tArr[0] = fT;
-    tArr[1] = tAno;
-    tArr[2] = this.dom.bypassSecurityTrustHtml(ct.replace(/(?:\r\n|\r|\n)/g, '<br>&gt;').replace(/\s\s+/, ''));
-    console.log(tArr);
-    return tArr;
   }
 
   takePic($event){
@@ -190,19 +141,20 @@ export class ClarifaiPage {
 	          let bgImg = response['secure_url'];
 	          //self.tags = self.getTags(response);
 
-              self.clarifai_app.models.predict(clarifai.GENERAL_MODEL, bgImg).then(
-				  function(resp) {
-	          		self.dataLoaded = true;
-	          		self.bgImg = bgImg;
-	          		self.tags = self.getClarifyTags(resp);
-	          		self.fire.newImage(resp).then(console.log).catch(console.info);
-              		load.dismiss();
-	          		console.log(self.tags);
-				  },
-				  function(err) {
-				    console.info(err);
-				  }
-			  );
+              textapi.imageTags({
+              	url:bgImg
+              },
+              function(error,resp) {
+              	if(error === null){
+              		console.log(resp);
+		            self.fire.newImage(resp).then(console.log).catch(console.info);
+			        self.dataLoaded = true;
+			        self.bgImg = bgImg;
+		            self.tags = self.getTags(resp);
+		            load.dismiss();
+              	}
+              });
+              
             }
           }
 

@@ -36,7 +36,7 @@ export class ImaggaPage {
 	tags: Array<any> = [];
 	@ViewChild('vid') vid: ElementRef;
 	@ViewChild(Content) content: Content;
-	floorFont : string = '0.025vh';
+	floorFont : string = '0.075vh';
 	clarifai_app : any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private http: Http, private loader:LoadingController, private render: Renderer2) {
   }
@@ -151,13 +151,13 @@ export class ImaggaPage {
 	          let bgImg = response['secure_url'];
 	          //self.tags = self.getTags(response);
 
-              self.fire.newImage(response).then(console.log).catch(console.info);
               self.call(bgImg).then(res=>{
               	let resp = res.json()
               	console.log(resp);
 	          	self.dataLoaded = true;
 	          	self.bgImg = bgImg;
               	self.tags = self.getTags(resp);
+              	self.fire.newImage(resp).then(console.log).catch(console.info);
               	load.dismiss();
               }).catch(console.info);
               
