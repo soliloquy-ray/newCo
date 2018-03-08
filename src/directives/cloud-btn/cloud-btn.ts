@@ -4,6 +4,8 @@ import { LoadingController } from 'ionic-angular';
 
 import { FirebaseProvider } from "../../providers/firebase/firebase";
 
+import {keys} from "../../config/keys";
+
 declare var require: any;
 var sha1 = require('sha1');
 import * as loadImage from 'blueimp-load-image';
@@ -24,9 +26,9 @@ import * as loadImage from 'blueimp-load-image';
 export class CloudBtnDirective {
 
     tstamp = Date.now();
-	cloudName:string = 'cloudstrife';
-	secretKey: string = "SJN5BGSKv8GOMDJJvQV1c6VDe0Q";
-	apiKey: string = '532699365372897';
+	cloudName:string = keys.cloudinary.cloudName;
+	secretKey: string = keys.cloudinary.secretKey;
+	apiKey: string = keys.cloudinary.apiKey;
 	@Input('fn') fn: Function;
 	@Input('maxHeight') maxHeight:number = 800;
 	@Input('maxWidth') maxWidth:number = 800;

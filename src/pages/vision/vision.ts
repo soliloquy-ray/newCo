@@ -5,10 +5,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { FirebaseProvider } from "../../providers/firebase/firebase";
 
+import {keys} from "../../config/keys";
+
 declare var require: any;
 var sha1 = require('sha1');
-
-var clarifai = require('clarifai');
 import * as loadImage from 'blueimp-load-image';
 
 /**
@@ -25,8 +25,8 @@ import * as loadImage from 'blueimp-load-image';
 })
 export class VisionPage {
     tstamp = Date.now();
-	cloudName:string = 'cloudstrife';
-    uploadPreset: string = 'iqx9xm8u';
+	cloudName:string = keys.cloudinary.cloudName;
+    uploadPreset: string = keys.cloudinary.uploadPreset;
 	bgImg: any = '';
 	prod:any;
 	heighter : any = "90vh";
@@ -35,8 +35,7 @@ export class VisionPage {
 	@ViewChild('vid') vid: ElementRef;
 	@ViewChild(Content) content: Content;
 	tagging:string = 'imagga_tagging';
-	floorFont : string = '4vh';
-	clarifai_app : any;
+	floorFont : string = '15vh';
   constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private dom: DomSanitizer, private loader:LoadingController, private render: Renderer2) {
   	/*this.fire.getAllImages().then(res=>{
       Object.keys(res).forEach((val,ind)=>{
@@ -48,10 +47,6 @@ export class VisionPage {
       });
       console.log(this.prod,this.bgImg);
   	})*/
-  	this.clarifai_app = new clarifai.App({
-  		apiKey: "e2259120c55b4d7695c71195289ddf3a"
-  	});
-  	console.log(this.clarifai_app);
   }
 
   ionViewDidLoad() {
@@ -84,13 +79,6 @@ export class VisionPage {
 
   getTags(elem){
     let ret = elem['info']['categorization'][this.tagging]['data'];
-    console.log(ret);
-    ret = this.shuffle(ret);
-    return ret;
-  }
-
-  getClarifyTags(elem){
-    let ret = elem['outputs'][0]['data']['concepts'];
     console.log(ret);
     ret = this.shuffle(ret);
     return ret;
@@ -185,22 +173,12 @@ export class VisionPage {
               var response = JSON.parse(xhr.responseText);
               console.log(response);
 	          self.prod = response;
-	          let bgImg = response['secure_url'];
-	          //self.tags = self.getTags(response);
+	          self.bgImg = response['secure_url'];
+	          self.tags = self.getTags(response);
+	          self.dataLoaded = true;
 
               self.fire.newImage(response).then(console.log).catch(console.info);
-              self.clarifai_app.models.predict(clarifai.GENERAL_MODEL, bgImg).then(
-				  function(response) {
-	          		self.dataLoaded = true;
-	          		self.bgImg = bgImg;
-	          		self.tags = self.getClarifyTags(response);
-              		load.dismiss();
-	          		console.log(self.tags);
-				  },
-				  function(err) {
-				    console.info(err);
-				  }
-			  );
+              load.dismiss();
             }
           }
 
@@ -209,15 +187,13 @@ export class VisionPage {
           fd.append('public_id', pid);
           fd.append('timestamp', self.tstamp.toString());
           //fd.append('upload_preset',self.uploadPreset);
-          //fd.append('categorization', self.tagging);
-          //fd.append('auto_tagging','0.25');
+          fd.append('categorization', self.tagging);
+          fd.append('auto_tagging','0.25');
 
           /* no longer need signed uploads */
-          let secret = "SJN5BGSKv8GOMDJJvQV1c6VDe0Q"
-          //let secret = "BBImHLi3cw-Y_NynlbMU3HYyhH0";
-          fd.append('api_key', '532699365372897'); // 299675785887213 Optional - add tag for image admin in Cloudinary
-          //let signed = sha1('auto_tagging=0.25&categorization='+self.tagging+'&public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
-          let signed = sha1('public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
+          let secret = keys.cloudinary.secretKey
+          fd.append('api_key', keys.cloudinary.apiKey); // 299675785887213 Optional - add tag for image admin in Cloudinary
+          let signed = sha1('auto_tagging=0.25&categorization='+self.tagging+'&public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
           fd.append('signature', signed); // Optional - add tag for image admin in Cloudinary
           xhr.send(fd);
         },

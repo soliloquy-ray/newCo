@@ -31,8 +31,8 @@
 		<section *ngIf = "dataLoaded">
 		<b class="head-desc">Image Tags</b>
 		<ul>
-			<li [ngStyle] = "{'fontSize':'calc('+floorFont+' * '+rek?.confidence+')'}" *ngFor = "let rek of tags" (click)="tappedOut($event)" >{{rek?.tag}}
-				<p class="tooltip">- {{rek?.confidence * 100 | number: '0.0-0'}}%</p>
+			<li [ngStyle] = "{'fontSize':'calc('+floorFont+' * '+rek?.value+')'}" *ngFor = "let rek of tags" (click)="tappedOut($event)" >{{rek?.name}}
+				<p class="tooltip">- {{rek?.value * 100 | number: '0.0-0'}}%</p>
 			</li>
 			<!--li> | {{rek?.confidence * 100 | number:'0.2-2'}}% </li-->
 		</ul>

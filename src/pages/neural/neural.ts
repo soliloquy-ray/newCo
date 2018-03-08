@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Http } from '@angular/http';
 
+import {keys} from "../../config/keys"
+
 /**
  * Generated class for the NeuralPage page.
  *
@@ -18,7 +20,7 @@ import { Http } from '@angular/http';
 export class NeuralPage {
 	overlay: any;
 	orig: any;
-	cloudName: string ="cloudstrife";
+	cloudName: string = keys.cloudinary.cloudName;
 	url: string = `https://res.cloudinary.com/${this.cloudName}/image/upload/w_800,h_800,c_fill/`;
 	art: any = "";
   constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http) {

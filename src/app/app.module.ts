@@ -19,6 +19,7 @@ import { TransactionListPage } from '../pages/transaction-list/transaction-list'
 import { VisionPage } from '../pages/vision/vision';
 import { OcrPage } from '../pages/ocr/ocr';
 import { NeuralPage } from '../pages/neural/neural';
+import { ClarifaiPage } from '../pages/clarifai/clarifai';
 
 
 import { EvtProvider } from '../providers/evt/evt';
@@ -42,7 +43,8 @@ const pages = [
             TransactionListPage,
             VisionPage,
             OcrPage,
-            NeuralPage
+            NeuralPage,
+            ClarifaiPage
           ];
 
 @NgModule({
@@ -64,6 +66,7 @@ const pages = [
         { component: VisionPage, name: 'VisionPage', segment: 'vision' },
         { component: OcrPage, name: 'OcrPage', segment: 'ocr' },
         { component: NeuralPage, name: 'NeuralPage', segment: 'artwork' },
+        { component: ClarifaiPage, name: 'ClarifaiPage', segment: 'clarifai' },
       ]
     }),
   ],
