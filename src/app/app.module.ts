@@ -20,6 +20,7 @@ import { VisionPage } from '../pages/vision/vision';
 import { OcrPage } from '../pages/ocr/ocr';
 import { NeuralPage } from '../pages/neural/neural';
 import { ClarifaiPage } from '../pages/clarifai/clarifai';
+import { ImaggaPage } from '../pages/imagga/imagga';
 
 
 import { EvtProvider } from '../providers/evt/evt';
@@ -44,7 +45,8 @@ const pages = [
             VisionPage,
             OcrPage,
             NeuralPage,
-            ClarifaiPage
+            ClarifaiPage,
+            ImaggaPage
           ];
 
 @NgModule({
@@ -67,6 +69,7 @@ const pages = [
         { component: OcrPage, name: 'OcrPage', segment: 'ocr' },
         { component: NeuralPage, name: 'NeuralPage', segment: 'artwork' },
         { component: ClarifaiPage, name: 'ClarifaiPage', segment: 'clarifai' },
+        { component: ImaggaPage, name: 'ImaggaPage', segment: 'imagga' },
       ]
     }),
   ],

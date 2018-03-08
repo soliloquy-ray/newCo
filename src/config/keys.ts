@@ -19,6 +19,6 @@ export var keys = {
 	imagga : {
 		apiKey: 'acc_a834bfe4efcb4f6',
 		secretKey: '0b63cdc9b93942fac0a84cb3bf3211dd',
-
+		target: 'http://api.imagga.com/v1/tagging?url=',
 	}
 };
