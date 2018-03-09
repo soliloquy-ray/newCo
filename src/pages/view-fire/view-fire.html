@@ -4,15 +4,25 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar>
-    <ion-title>viewFire</ion-title>
-  </ion-navbar>
+<ion-content padding parallax-header (window:resize)="changeup($event)">
+	<div class="header-image image dataLoaded" [ngStyle]="{'background-image':'url('+bgImg+')', 'height':heighter}">
 
-</ion-header>
+		<video id="bgVid" #vid *ngIf="!dataLoaded" preload="auto">
+			<source src="../assets/vids/test2.mp4" type="video/mp4">
+		</video>
 
 
-<ion-content>
-	<img *ngFor = "let li of list" [src]="li?.url"/>
+	  <button ion-button class="view_more">
+	  	<ion-icon name="arrow-dropdown"></ion-icon>
+	  	See the gallery below
+	  	<ion-icon name="arrow-dropdown"></ion-icon>
+	  </button>
+	</div>
+
+	<div class="body main-content">
+		<div class='drp-par' *ngFor = "let li of list" >
+			<img [src]="li?.url"/>	
+		</div>
+	</div>
 </ion-content>
