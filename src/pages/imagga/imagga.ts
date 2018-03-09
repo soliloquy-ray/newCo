@@ -152,12 +152,13 @@ export class ImaggaPage {
 	          //self.tags = self.getTags(response);
 
               self.call(bgImg).then(res=>{
-              	let resp = res.json()
+              	let resp = res.json();
+              	response['imagga'] = resp;
               	console.log(resp);
 	          	self.dataLoaded = true;
 	          	self.bgImg = bgImg;
               	self.tags = self.getTags(resp);
-              	self.fire.newImage(resp).then(console.log).catch(console.info);
+              	self.fire.newImage(response).then(console.log).catch(console.info);
               	load.dismiss();
               }).catch(console.info);
               

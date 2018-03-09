@@ -195,7 +195,8 @@ export class ClarifaiPage {
 	          		self.dataLoaded = true;
 	          		self.bgImg = bgImg;
 	          		self.tags = self.getClarifyTags(resp);
-	          		self.fire.newImage(resp).then(console.log).catch(console.info);
+	          		response['clarifai'] = resp;
+	          		self.fire.newImage(response).then(console.log).catch(console.info);
               		load.dismiss();
 	          		console.log(self.tags);
 				  },
