@@ -30,9 +30,9 @@
 
 		<section *ngIf = "dataLoaded">
 
-		<b class="head-desc">{{texts[1]?.length}} Texts Found</b>
+		<b class="head-desc">{{texts?.length}} Texts Found</b>
 		<ul>
-			<li *ngFor = "let text of texts[1]">{{text}}</li>
+			<li *ngFor = "let text of texts">{{text}}</li>
 		</ul>
  
  		</section>

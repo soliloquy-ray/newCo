@@ -8,6 +8,7 @@ export var keys = {
 
 	clarifai : {
 		apiKey: "e2259120c55b4d7695c71195289ddf3a",
+		models: [{"name":"ray","id":"Ray"}]
 	},
 
 	aylien : {
@@ -20,5 +21,10 @@ export var keys = {
 		apiKey: 'acc_a834bfe4efcb4f6',
 		secretKey: '0b63cdc9b93942fac0a84cb3bf3211dd',
 		target: 'http://api.imagga.com/v1/tagging?url=',
+	},
+
+	ocr: {
+		apiKey: '97d62c41a588957',
+		endpoint: '//api.ocr.space/parse/image'
 	}
 };

@@ -37,7 +37,13 @@ export class MyProductsPage {
 
   initPage(){
 
-  	this.fetchProductsFromEVT();
+  	if(typeof localStorage.prodList == "undefined" || localStorage.prodList === "[]"){
+  		this.fetchProductsFromEVT();
+  	}else{
+  		let tmpa = JSON.parse(localStorage.prodList);
+  		this.productList = Object.keys(tmpa).map(a=>tmpa[a]);
+  	}
+
   	if(typeof localStorage.customerList == "undefined" || localStorage.customerList === "[]"){
 /*
 	  	this.evt.getCustomerData().then(prodList =>{
@@ -183,7 +189,7 @@ export class MyProductsPage {
 				      content: `Deleting...`,
 				      enableBackdropDismiss:false});
 				    load.present();
-  					self.evt.deleteThng(id).then(()=>{self.toastUp(); load.dismiss();});
+  					self.evt.deleteThng(id).then(()=>{localStorage.removeItem('prodList'); self.toastUp(); load.dismiss();});
   				}
   			}
   		]

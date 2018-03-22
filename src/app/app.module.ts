@@ -24,14 +24,14 @@ import { ImaggaPage } from '../pages/imagga/imagga';
 import { AylienPage } from '../pages/aylien/aylien';
 import { ViewFirePage } from '../pages/view-fire/view-fire';
 
-
 import { EvtProvider } from '../providers/evt/evt';
+import { FirebaseProvider } from '../providers/firebase/firebase';
+import { OfflineDbProvider } from '../providers/offline-db/offline-db';
 
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from '../components/components.module';
 import { DirectivesModule } from '../directives/directives.module';
-import { FirebaseProvider } from '../providers/firebase/firebase';
 
 const pages = [
             MyApp,
@@ -87,7 +87,8 @@ const pages = [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpClientModule,
     EvtProvider,
-    FirebaseProvider
+    FirebaseProvider,
+    OfflineDbProvider
   ]
 })
 export class AppModule {}

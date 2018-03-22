@@ -56,7 +56,10 @@ export class ProductFormPage {
     load.present();
   	this.evt.getUserContext().then(user=>{
   		user.$init.then(usr=>{
-  			usr.thng().create(th).then(console.log).catch(console.info);
+  			usr.thng().create(th).then(thc=>{
+  				localStorage.removeItem("prodList");
+  				console.log(thc);
+  			}).catch(console.info);
   			load.dismiss();
   			self.dismiss(true);
   		}).catch(console.info);

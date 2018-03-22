@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController, Content } from 
 
 import { DomSanitizer } from '@angular/platform-browser';
 
+import { Http, RequestOptions, Headers } from '@angular/http';
+
 import { FirebaseProvider } from "../../providers/firebase/firebase";
 
 import {keys} from "../../config/keys";
@@ -34,7 +36,7 @@ export class OcrPage {
 	texts : any = [];
 	@ViewChild('vid') vid: ElementRef;
 	@ViewChild(Content) content: Content;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private dom: DomSanitizer, private loader:LoadingController, private render: Renderer2) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private fire: FirebaseProvider, private dom: DomSanitizer, private loader:LoadingController, private render: Renderer2, private http: Http) {
   	/*this.fire.getAllImages().then(res=>{
       Object.keys(res).forEach((val,ind)=>{
          this.prod = res[val];
@@ -72,12 +74,20 @@ export class OcrPage {
   	this.content.scrollTo(0,this.heighter.replace(/[^0-9]/g,""),300);
   }
 
-  getTags(elem){
-    let ret = elem['info']['categorization']['imagga_tagging']['data'];
-    console.log(ret);
-    return ret;
+  getImageType(filename){
+  	return (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename) : undefined;
   }
 
+  ocrTrigger(img):Promise<any>{
+  	let self = this;
+  	let body = new FormData();
+  	body.append('url',img);
+  	body.append('language','eng');
+  	body.append('apikey',keys.ocr.apiKey);
+  	body.append('isOverlayRequired','true');
+  	return this.http.post(keys.ocr.endpoint,body).toPromise();
+  }
+/*
   getOcr(elem){
   	if(typeof elem['info']['ocr']['adv_ocr']['data'][0]['textAnnotations'] == "undefined"){
   		return [[],[],[]];
@@ -99,7 +109,7 @@ export class OcrPage {
     tArr[2] = this.dom.bypassSecurityTrustHtml(ct.replace(/(?:\r\n|\r|\n)/g, '<br>&gt;').replace(/\s\s+/, ''));
     console.log(tArr);
     return tArr;
-  }
+  }*/
 
   takePic($event){
     let self = this;
@@ -142,11 +152,19 @@ export class OcrPage {
               console.log(response);
 	          self.prod = response;
 	          self.bgImg = response['secure_url'];
-	          self.texts = self.getOcr(response);
-	          self.dataLoaded = true;
+	          self.ocrTrigger(self.bgImg)
+	          		.then(rs=>{
+	          			let res = rs.json();
+	          			console.log(res);
+  						self.texts = res['ParsedResults'][0]['ParsedText'].split(/\n/).filter(n=>n);
+  						console.log(self.texts);
+  						response['ocr'] = res;
+			            self.fire.newImage(response).then(console.log).catch(console.info);
+	          			self.dataLoaded = true;
+			            load.dismiss();
+					})
+					.catch(console.info);
 
-              self.fire.newImage(response).then(console.log).catch(console.info);
-              load.dismiss();
             }
           }
 
@@ -154,15 +172,7 @@ export class OcrPage {
           fd.append('file', base64data);
           fd.append('public_id', pid);
           fd.append('timestamp', self.tstamp.toString());
-          //fd.append('upload_preset',self.uploadPreset);
-          fd.append('ocr','adv_ocr');
-
-          /* no longer need signed uploads */
-          let secret = keys.cloudinary.secretKey;
-          //let secret = "BBImHLi3cw-Y_NynlbMU3HYyhH0";
-          fd.append('api_key', keys.cloudinary.apiKey); // 299675785887213 Optional - add tag for image admin in Cloudinary
-          let signed = sha1('ocr=adv_ocr&public_id='+pid+'&timestamp='+self.tstamp.toString()+secret);
-          fd.append('signature', signed); // Optional - add tag for image admin in Cloudinary
+          fd.append('upload_preset',self.uploadPreset);
           xhr.send(fd);
         },
 
