@@ -3,12 +3,12 @@
   "name": "Home Base",
   "icons": [
     {
-      "src": "/src/assets/icon/mads.jpg",
+      "src": "/assets/icon/mads.jpg",
       "type": "image/jpg",
       "sizes": "192x192"
     },
     {
-      "src": "/src/assets/icon/mads.jpg",
+      "src": "/assets/icon/mads.jpg",
       "type": "image/jpg",
       "sizes": "512x512"
     }
