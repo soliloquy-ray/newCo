@@ -1,20 +1,20 @@
 {
-  "short_name": "home",
+  "short_name": "MADS Styling",
   "name": "Home Base",
   "icons": [
     {
-      "src": "/src/assets/icon/mads.jpg",
+      "src": "/assets/icon/mads.jpg",
       "type": "image/jpg",
       "sizes": "192x192"
     },
     {
-      "src": "/src/assets/icon/mads.jpg",
+      "src": "/assets/icon/mads.jpg",
       "type": "image/jpg",
       "sizes": "512x512"
     }
   ],
   "start_url": "index.html",
-  "background_color": "#333",
+  "background_color": "#dedede",
   "display": "standalone",
-  "theme_color": "#fff"
+  "theme_color": "#333333"
 }
