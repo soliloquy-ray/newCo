@@ -1,13 +1,20 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "short_name": "home",
+  "name": "Home Base",
+  "icons": [
+    {
+      "src": "/src/assets/icon/mads.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/src/assets/icon/mads.jpg",
+      "type": "image/jpg",
+      "sizes": "512x512"
+    }
+  ],
   "start_url": "index.html",
+  "background_color": "#333",
   "display": "standalone",
-  "icons": [{
-    "src": "assets/imgs/logo.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }],
-  "background_color": "#4e8ef7",
-  "theme_color": "#4e8ef7"
+  "theme_color": "#fff"
 }
