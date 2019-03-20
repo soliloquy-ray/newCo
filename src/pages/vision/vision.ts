@@ -79,8 +79,9 @@ export class VisionPage {
 
   getTags(elem){
     let ret = elem['info']['categorization'][this.tagging]['data'];
-    console.log(ret);
-    ret = this.shuffle(ret);
+    let mrgd = [].concat.apply([],ret);
+    console.log(ret,mrgd);
+    ret = this.shuffle(mrgd);
     return ret;
   }
 
